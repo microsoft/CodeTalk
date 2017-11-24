@@ -1,0 +1,44 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests
+{
+    /// <summary>
+    /// Class that wraps an integer for our tests.
+    /// </summary>
+    class ClassWithComments
+    {
+        private int m_i;
+
+        public ClassWithComments(int i)
+        {
+            m_i = i; //assign a number
+        }
+
+        //Return the number stored
+		//Multiline comment for testing to ensure
+
+		//that non-documentation comments work.
+        public int Get_I() { return m_i; }
+
+        /// <summary>
+        /// Returns the square of the number. 
+        /// </summary>
+        /// <returns>long, square of number to compensate for overflow</returns>
+        public long Square()
+        {
+			return m_i * m_i; /* Start of a multi-line comment that
+				must be correctly parsed */
+
+        }
+
+    }
+}

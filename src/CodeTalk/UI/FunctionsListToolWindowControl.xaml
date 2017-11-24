@@ -1,0 +1,66 @@
+﻿<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+     Licensed under the MIT License. -->
+
+<UserControl x:Class="Microsoft.CodeTalk.AccessibilityToolbarWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Microsoft.CodeTalk"
+             Background="{DynamicResource VsBrush.Window}"
+             Foreground="{DynamicResource VsBrush.WindowText}"
+             mc:Ignorable="d"
+             d:DesignHeight="1800" d:DesignWidth="1600"
+             Name="Accessibility_Toolbar"
+             KeyDown="Window_KeyDown">
+    <UserControl.Resources>
+        <Style x:Key="LibraryTreeViewItemStyle"
+               TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded"
+                        Value="{Binding IsExpanded, Mode=TwoWay}" />
+            <Setter Property="IsSelected"
+                        Value="{Binding IsSelected, Mode=TwoWay}" />
+            <Setter Property="FontWeight"
+                        Value="Normal" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected"
+                              Value="True">
+                    <Setter Property="FontWeight"
+                              Value="Normal" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer Name="MainScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+        <Grid Name="MainGrid" ScrollViewer.CanContentScroll="True" VerticalAlignment="Stretch" >
+            <Grid>
+                <TreeView  ItemContainerStyle="{StaticResource LibraryTreeViewItemStyle}" Margin="5" 
+                           Name="treeView"  MouseDoubleClick="ListItemDoubleClick" 
+                           AutomationProperties.Name="File Summary" FontSize="15" Visibility="Collapsed"
+                           ItemsSource="{Binding TreeItems}"
+                           VerticalAlignment="Stretch">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type local:MenuItemViewModel}" ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="25" Height="25" Margin="0 0 2 0" Stretch="UniformToFill" Source="{Binding ImageSource}" />
+                                <TextBlock Name="NameTextBlock" Text="{Binding DisplayText}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+                <ListView Margin="5" VerticalAlignment="Stretch" FontSize="15" 
+                          MouseDoubleClick="ListItemDoubleClick" AutomationProperties.Name="Functions" 
+                          Name="listView" Visibility="Collapsed">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="25" Height="25" Margin="0 0 2 0" Stretch="UniformToFill" Source="{Binding ImageSource}" />
+                                <TextBlock Name="NameTextBlock" Text="{Binding DisplayText}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

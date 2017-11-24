@@ -1,0 +1,35 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests.Programs
+{
+    class OverridingAndProperty
+    {
+        internal int X 
+        { 
+            get {return m_x;}
+			private set { m_x = value;}
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+		public int this[int key]
+		{
+			get { return 0; }
+		}
+		public virtual void DoSomething()
+		{
+		}
+
+		int m_x = 0;
+    }
+}

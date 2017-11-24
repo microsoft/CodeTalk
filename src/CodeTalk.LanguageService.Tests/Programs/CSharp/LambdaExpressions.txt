@@ -1,0 +1,36 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests.Programs.CSharp
+{
+    public class LambdaExpressions
+    {
+        public long SumOfSquares(List<int> items)
+        {
+            return items.Select(y => y * y).Sum();
+        }
+
+        public void NestedAnonymousMethods()
+        {
+            Enumerable.Range(0, 20).ToDictionary(num => num, val =>
+            {
+                return Enumerable.Range(0, val).Select(lt => lt);
+            });
+        }
+
+		public void TestParanthesizedAnonymousMethods()
+		{
+            var str = Enumerable.Range(0, 20).Aggregate("", (acc, val) => acc + val.ToString());
+            Console.WriteLine(str);
+		}
+           
+    }
+}

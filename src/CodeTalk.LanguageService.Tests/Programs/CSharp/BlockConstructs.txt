@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CodeTalk.LanguageService.Tests.Programs.CSharp
+{
+    class BlockConstructs
+    {
+        public string FilterArray(List<string> values, string value)
+        {
+            foreach (var val in values)
+            {
+                if (val.Equals(value))
+                {
+                    Console.WriteLine($"{value} found.");
+                    return value;
+                }
+                else
+                {
+                    continue; //dummy statement. 
+                }
+            }
+            return null;
+        }
+    }
+}

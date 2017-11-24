@@ -1,0 +1,31 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests.Programs.CSharp
+{
+    public class DelegatesAndExterns
+    {
+        private delegate void GetNative(uint size);
+        
+        public void someMethod()
+        {
+            System.Threading.Thread nt1 = new System.Threading.Thread(delegate ()
+            {
+                Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            });
+
+            GetNative native = delegate (uint size) { Console.WriteLine("In GetNative delegate."); };
+        }
+
+        private static extern IntPtr DrawImage(int idHook, IntPtr hMod, uint dwThreadId);
+    }
+}

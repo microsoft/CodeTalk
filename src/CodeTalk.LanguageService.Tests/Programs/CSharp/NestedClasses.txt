@@ -1,0 +1,31 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests.Programs
+{
+    internal class OuterClass
+    {
+        internal class InnerClass
+        {
+            internal void Foo()
+            {
+            }
+            private int bar(int x)
+            {
+                return x;
+            }
+        }
+        internal InnerClass GetObject()
+        {
+            return new InnerClass();
+        }        
+    }
+}

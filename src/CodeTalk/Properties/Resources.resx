@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutMoreInfo" xml:space="preserve">
+    <value>For more queries, please mail us at </value>
+    <comment>TextBlock text that displays link to email ID for feedback.</comment>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>CodeTalk is a Visual Studio plugin that improves IDE accessibility for screen reader users.</value>
+    <comment>Content to be displayed in the About CodeTalk window.</comment>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About CodeTalk</value>
+    <comment>Title text for the about CodeTalk window</comment>
+  </data>
+  <data name="CodeTalkKeyAutomationText" xml:space="preserve">
+    <value>CodeTalk Key Selection</value>
+    <comment>AutomationProperties.Name string for the CodeTalk key selection combo box.</comment>
+  </data>
+  <data name="CodeTalkKeyText" xml:space="preserve">
+    <value>CodeTalk Key</value>
+    <comment>Display text for the column where the user selects the CodeTalk key.</comment>
+  </data>
+  <data name="CodeTalkModifierAutomationText" xml:space="preserve">
+    <value>CodeTalk Modifier Key Selection</value>
+    <comment>AutomationProperties.name string for the CodeTalk modifier key selection combobox</comment>
+  </data>
+  <data name="CodeTalkModifierText" xml:space="preserve">
+    <value>CodeTalk Modifier Key</value>
+    <comment>Display text for the CodeTalk modifier column header</comment>
+  </data>
+  <data name="CodeTalkString" xml:space="preserve">
+    <value>CodeTalk</value>
+  </data>
+  <data name="CompilationErrorMessage" xml:space="preserve">
+    <value>The file has syntax errors. Please fix them and try again.</value>
+  </data>
+  <data name="ContinueAutomationText" xml:space="preserve">
+    <value>Continue Breakpoint</value>
+    <comment>AutomationProperties.Name string for continue breakpoint checkbox.</comment>
+  </data>
+  <data name="ContinueCheckBoxText" xml:space="preserve">
+    <value>Continue Breakpoint</value>
+    <comment>Display text for the continue breakpoint checkbox.</comment>
+  </data>
+  <data name="CreateAutomationText" xml:space="preserve">
+    <value>Create TalkPoint</value>
+    <comment>AutomationProperties.Name string for Create TalkPoint button.</comment>
+  </data>
+  <data name="CreateButtonText" xml:space="preserve">
+    <value>Create TalkPoint</value>
+    <comment>Display text for add TalkPoint button.</comment>
+  </data>
+  <data name="ErrorListKey" xml:space="preserve">
+    <value>Get Errors Command Key</value>
+    <comment>Display text for the ErrorList command key.</comment>
+  </data>
+  <data name="ErrorListKeyAutomationText" xml:space="preserve">
+    <value>Get Errors Command Key Selection</value>
+    <comment>AutomationProperties.Name string for ErrorList key selection.</comment>
+  </data>
+  <data name="ErrorListModifierAutomationText" xml:space="preserve">
+    <value>Get Errors Command Modifier Key Selection</value>
+    <comment>AutomationProperties.Name string for the ErrorList modifier key selection combo box.</comment>
+  </data>
+  <data name="ErrorListModifierText" xml:space="preserve">
+    <value>Get Errors Command Modifier Key</value>
+    <comment>Display text for the ErrorList modifier key selection.</comment>
+  </data>
+  <data name="ErrorListText" xml:space="preserve">
+    <value>Get Errors Command</value>
+    <comment>Display text for the ErrorList commands.</comment>
+  </data>
+  <data name="ErrorListTitle" xml:space="preserve">
+    <value>List of errors</value>
+    <comment>Title text for the error list window</comment>
+  </data>
+  <data name="ExitButtonText" xml:space="preserve">
+    <value>Exit</value>
+    <comment>AutomationProperties.Name string for the exit button in the Add TalkPoint window.</comment>
+  </data>
+  <data name="FileProcessError" xml:space="preserve">
+    <value>Unable to process code file due to an internal error</value>
+    <comment>Message box text to display when there is an error while parsing file for code summary.</comment>
+  </data>
+  <data name="FileSummaryAutomation" xml:space="preserve">
+    <value>File Summary</value>
+    <comment>AutomationProperties.Name string for the file summary treeview.</comment>
+  </data>
+  <data name="FileSummaryTitle" xml:space="preserve">
+    <value>File summary</value>
+    <comment>Title text for the file summary window</comment>
+  </data>
+  <data name="FunctionsListModifierAutomationText" xml:space="preserve">
+    <value>Get Functions Command Modifier Key Selection</value>
+    <comment>AutomationProperties.Name string for the FunctionsList modifier key selection combo box.</comment>
+  </data>
+  <data name="FunctionsListModifierText" xml:space="preserve">
+    <value>Get Functions Command Modifier Key</value>
+    <comment>Display text for the modifier key selection for FunctionsList.</comment>
+  </data>
+  <data name="FunctionsListText" xml:space="preserve">
+    <value>Get Functions Command</value>
+    <comment>Display text for the FunctionsList command.</comment>
+  </data>
+  <data name="FunctionsListTitle" xml:space="preserve">
+    <value>List of functions</value>
+    <comment>String containing the title for the functions list view.</comment>
+  </data>
+  <data name="GetContextKey" xml:space="preserve">
+    <value>Get Context Command Key</value>
+    <comment>Display text for selecting GetContext key.</comment>
+  </data>
+  <data name="GetContextKeyAutomationText" xml:space="preserve">
+    <value>Get Context Command Key Selection</value>
+    <comment>AutomationProperties.Name string for the GetContext command key selection combobox</comment>
+  </data>
+  <data name="GetContextModifierAutomationText" xml:space="preserve">
+    <value>Get Context Command Modifier Key Selection</value>
+    <comment>AutomationProperties.Name string for GetContext modifier key selection combobox.</comment>
+  </data>
+  <data name="GetContextModifierText" xml:space="preserve">
+    <value>Get Context Command Modifier Key</value>
+    <comment>Display text for GetContext modifier key selection</comment>
+  </data>
+  <data name="GetContextText" xml:space="preserve">
+    <value>Get Context Command</value>
+    <comment>Display text for GetContext command.</comment>
+  </data>
+  <data name="GetContextTitle" xml:space="preserve">
+    <value>Current context</value>
+  </data>
+  <data name="GetFunctionsKeyAutomationText" xml:space="preserve">
+    <value>Get Functions Command Key Selection</value>
+    <comment>AutomationProperties.Name string for the GetFunctions key selection combo box.</comment>
+  </data>
+  <data name="GetFunctionsKeyText" xml:space="preserve">
+    <value>Get Functions Command Key</value>
+    <comment>Display text for the GetFunctions command.</comment>
+  </data>
+  <data name="GetSummaryKey" xml:space="preserve">
+    <value>Get Summary Command Key</value>
+    <comment>Display text for the GetSummary command key.</comment>
+  </data>
+  <data name="GetSummaryKeyAutomationText" xml:space="preserve">
+    <value>Get Summary Command Key Selection</value>
+    <comment>AutomationProperties.Name string for the GetSummary key selection combo box.</comment>
+  </data>
+  <data name="GetSummaryModifierAutomationText" xml:space="preserve">
+    <value>Get Summary Command Modifier Key Selection</value>
+    <comment>AutomationProperties.Name string for the GetSummary modifier key selection combo box.</comment>
+  </data>
+  <data name="GetSummaryModifierText" xml:space="preserve">
+    <value>Get Summary Command Modifier Key</value>
+    <comment>Display text for the GetSummary modifier key selection.</comment>
+  </data>
+  <data name="GetSummaryText" xml:space="preserve">
+    <value>Get Summary Command</value>
+    <comment>Display text for the GetSummary command.</comment>
+  </data>
+  <data name="MoveToContextKeyAutomation" xml:space="preserve">
+    <value>Move to Context Command Key Selection</value>
+    <comment>AutomationProperties.Name string for MoveToContext command key selection combobox.</comment>
+  </data>
+  <data name="MoveToContextKeyText" xml:space="preserve">
+    <value>Move To Context Command Key</value>
+    <comment>Display text for MoveToContext command key selection.</comment>
+  </data>
+  <data name="MoveToContextModifierAutomation" xml:space="preserve">
+    <value>Move to Context Command Modifer Key</value>
+    <comment>AutomationProperties.Name string for MoveToContext modifier selection combobox</comment>
+  </data>
+  <data name="MoveToContextModifierText" xml:space="preserve">
+    <value>Move To Context Command Modifier Key</value>
+    <comment>Display text for displaying the MoveToContext modifier key.</comment>
+  </data>
+  <data name="MoveToContextText" xml:space="preserve">
+    <value>Move To Context Command</value>
+    <comment>Display text for the MoveToContext command.</comment>
+  </data>
+  <data name="NoContextString" xml:space="preserve">
+    <value>No context found in line</value>
+    <comment>String to display in message box when GetContext is invoked and there is no context to show.</comment>
+  </data>
+  <data name="NoErrorsString" xml:space="preserve">
+    <value>No errors found.</value>
+    <comment>message box text to display when error list functionality is invoked when there are no errors in the code.</comment>
+  </data>
+  <data name="NoFunctionsString" xml:space="preserve">
+    <value>No functions found.</value>
+    <comment>String to display in the message box when functions list is invoked on code that does not contain functions.</comment>
+  </data>
+  <data name="OptionsCancelText" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Display text for cancel button in the options window.</comment>
+  </data>
+  <data name="OptionsSubmitText" xml:space="preserve">
+    <value>Submit</value>
+    <comment>Display text for submit button in the options window.</comment>
+  </data>
+  <data name="OptionsTitle" xml:space="preserve">
+    <value>CodeTalkOptions</value>
+    <comment>Title text for the CodeTalk options window.</comment>
+  </data>
+  <data name="PrivacyButtonText" xml:space="preserve">
+    <value>Privacy and cookies</value>
+    <comment>Button text for the privacy and cookies button.</comment>
+  </data>
+  <data name="SkipCommentKey" xml:space="preserve">
+    <value>Skip Comment Command Key</value>
+    <comment>Display text for SkipComment command key.</comment>
+  </data>
+  <data name="SkipCommentKeyAutomationText" xml:space="preserve">
+    <value>Skip Comment Command Key Selection</value>
+    <comment>AutomationProperties.Name string for skipCommand key selection combobox.</comment>
+  </data>
+  <data name="SkipCommentModifierAutomationText" xml:space="preserve">
+    <value>Skip Comment Command Modifier Key Selection</value>
+    <comment>AutomationProperties.Name string for SkipComment modifier key selection combobox.</comment>
+  </data>
+  <data name="SkipCommentModifierText" xml:space="preserve">
+    <value>Skip Comment Command Modifier Key</value>
+    <comment>Display text for the SkipCommand modifier key selection.</comment>
+  </data>
+  <data name="SkipCommentText" xml:space="preserve">
+    <value>Skip Comment Command</value>
+    <comment>Display text for the skip comments command.</comment>
+  </data>
+  <data name="StatementAutomation" xml:space="preserve">
+    <value>Expression or Statement (required)</value>
+    <comment>AutomationProperties.Name string for the statement textbox.</comment>
+  </data>
+  <data name="TalkPointKeyAutomationText" xml:space="preserve">
+    <value>Add TalkPoint Command Key Selection</value>
+    <comment>AutomationProperties.Name string for add TalkPoint key selection combobox.</comment>
+  </data>
+  <data name="TalkPointKeyText" xml:space="preserve">
+    <value>Add TalkPoint Command Key</value>
+    <comment>Display text for add TalkPoint command key selection.</comment>
+  </data>
+  <data name="TalkPointModifierAutomationText" xml:space="preserve">
+    <value>TalkPointModifierText</value>
+    <comment>AutomationProperties.Name string for add TalkPoint modifier key selection combobox.</comment>
+  </data>
+  <data name="TalkPointModifierText" xml:space="preserve">
+    <value>Add TalkPoint Command Modifier Key</value>
+    <comment>Display text to select add TalkPoint modifier key.</comment>
+  </data>
+  <data name="TalkPointSelectAutomation" xml:space="preserve">
+    <value>Select talkpoint type (required)</value>
+    <comment>AutomationProperties.Name string for the TalkPoint type selection combobox.</comment>
+  </data>
+  <data name="TalkPointSelectAutomationTextBox" xml:space="preserve">
+    <value>Select Talkpoint type *</value>
+    <comment>TalkPointSelectAutomationTextBox</comment>
+  </data>
+  <data name="TalkpointStatementTextBox" xml:space="preserve">
+    <value>Expression\Statement *</value>
+    <comment>TalkpointStatementTextBox</comment>
+  </data>
+  <data name="TalkPointText" xml:space="preserve">
+    <value>Add TalkPoint Command</value>
+    <comment>Display text for Add Talkpoint command.</comment>
+  </data>
+  <data name="TalkpointToneSelectTextBox" xml:space="preserve">
+    <value>Select tone *</value>
+    <comment>TalkpointToneSelectTextBox</comment>
+  </data>
+  <data name="TalkPointWindowTitle" xml:space="preserve">
+    <value>Set Breakpoint</value>
+    <comment>Title text of the TalkPoint window</comment>
+  </data>
+  <data name="ToneSelectAutomation" xml:space="preserve">
+    <value>Select tone (required)</value>
+    <comment>AutomationProperties.Name string for tone select combobox.</comment>
+  </data>
+</root>

@@ -1,14 +1,19 @@
+#CodeTalk
+Code Talk is a visual studio extension to make programming in Visual Studio more accessible. The plugin currently concentrates on three main aspects of Programming:
+1. Glanceability
+2. Real-Time Error information 
+3. Accessible Debugging
 
-# Contributing
+This is still in the initial stages of development. Please try it out and give your feedback.
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+----------
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+#Getting Started
+Download the CodeTalk VSIX Installer here.  
+To know more about CodeTalk features, please visit the [Wiki](https://codetalk.visualstudio.com/CodeTalk/_wiki).  
+To know more about building and testing CodeTalk, please click [here](https://codetalk.visualstudio.com/CodeTalk/_wiki?pagePath=%2FBuilding-and-Testing).
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+----------
+
+#Contribute
+Mail [codetalk@microsoft.com](mailto:codetalk@microsoft.com) for access. 

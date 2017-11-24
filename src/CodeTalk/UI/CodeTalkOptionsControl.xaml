@@ -1,0 +1,184 @@
+﻿<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+     Licensed under the MIT License. -->
+
+<UserControl x:Class="Microsoft.CodeTalk.CodeTalkOptionsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:p="clr-namespace:Microsoft.CodeTalk.Properties"
+             Background="{DynamicResource VsBrush.Window}"
+             Foreground="{DynamicResource VsBrush.WindowText}"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="600"
+             Name="MyToolWindow">
+	<Grid>
+		<ScrollViewer>
+			<StackPanel Orientation="Vertical" Margin="10">
+				<TextBlock Margin="10" HorizontalAlignment="Center" Text="{x:Static p:Resources.OptionsTitle}"/>
+				<StackPanel Orientation="Vertical">
+					<Grid Margin="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" Text="{x:Static p:Resources.CodeTalkModifierText}"/>
+						<ComboBox Name="CodeTalkModifierKeyComboBox" AutomationProperties.Name="{x:Static p:Resources.CodeTalkModifierAutomationText}" Grid.Column="1" MinWidth="100" />
+					</Grid>
+					<Grid Margin="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" Text="{x:Static p:Resources.CodeTalkKeyText}"/>
+						<ComboBox Name="CodeTalkKeyComboBox"  AutomationProperties.Name="{x:Static p:Resources.CodeTalkKeyAutomationText}" Grid.Column="1" MinWidth="100"/>
+					</Grid>
+
+					<!-- Get Functions Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="GetFunctionsCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.FunctionsListText}"/>
+						<Grid Name="GetFunctionsCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.FunctionsListModifierText}"/>
+							<ComboBox Name="GetFunctionsModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.FunctionsListModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.GetFunctionsKeyText}"/>
+							<ComboBox Name="GetFunctionsKeyCombobox"  AutomationProperties.Name="" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Get Summary Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="GetSummaryCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.GetSummaryText}"/>
+						<Grid Name="GetSummaryCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.GetSummaryModifierText}"/>
+							<ComboBox Name="GetSummaryModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetSummaryKeyAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.GetSummaryKey}"/>
+							<ComboBox Name="GetSummaryKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetSummaryKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Get Errors Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="GetErrorsCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.ErrorListText}"/>
+						<Grid Name="GetErrorsCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.ErrorListModifierText}"/>
+							<ComboBox Name="GetErrorsModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.ErrorListModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.ErrorListKey}"/>
+							<ComboBox Name="GetErrorsKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.ErrorListKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Skip Comment Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="SkipCommentCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.SkipCommentText}"/>
+						<Grid Name="SkipCommentCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.SkipCommentModifierText}"/>
+							<ComboBox Name="SkipCommentModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.SkipCommentModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.SkipCommentKey}"/>
+							<ComboBox Name="SkipCommentKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.SkipCommentKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Get Context Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="GetContextCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.GetContextText}"/>
+						<Grid Name="GetcontextCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.GetContextModifierText}"/>
+							<ComboBox Name="GetContextModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetContextModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Margin="0 5 0 5" Grid.Row="1" Text="{x:Static p:Resources.GetContextKey}"/>
+							<ComboBox Name="GetContextKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetContextKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Move To Context Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="MoveToContextCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.MoveToContextText}"/>
+						<Grid Name="MoveTocontextCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.MoveToContextModifierText}"/>
+							<ComboBox Name="MoveToContextModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.MoveToContextModifierAutomation}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.MoveToContextKeyText}"/>
+							<ComboBox Name="MoveToContextKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.MoveToContextKeyAutomation}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+
+					<!-- Create Breakpoint Command -->
+					<Separator Margin="0 5 0 0" />
+					<StackPanel Name="CreateBreakpointCommandStackPanel">
+						<TextBlock FontSize="11" Margin="0 5 0 0" Text="{x:Static p:Resources.TalkPointText}"/>
+						<Grid Name="CreateBreakpointCommandGrid" Margin="0 10 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="6*"/>
+								<ColumnDefinition Width="4*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.TalkPointModifierText}"/>
+							<ComboBox Name="CreateBreakpointModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.TalkPointModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.TalkPointKeyText}"/>
+							<ComboBox Name="CreateBreakpointKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.TalkPointKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+						</Grid>
+					</StackPanel>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<Button Name="CancelButton" Click="CancelButton_Click" Margin="5" Padding="5" Content="{x:Static p:Resources.OptionsCancelText}"/>
+					<Button Name="SubmitButton" Click="SubmitButton_Click" Margin="5" Padding="5" Content="{x:Static p:Resources.OptionsSubmitText}"/>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</UserControl>

@@ -1,0 +1,31 @@
+﻿//------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Microsoft.CodeTalk.LanguageService.Tests.Programs
+{
+    public static class StaticClassGenericMethods
+    {
+        public static void DoSomething(params string[] x)
+        {
+            var str = String.Join(",", x);
+            Console.WriteLine(str);
+        }
+        public static int NotSoRandomInt(int x = 0)
+        {
+            return 0;
+        }
+
+        public static void SetVal<T>(T x)
+        {
+            T val = x;
+        }
+    }
+}
