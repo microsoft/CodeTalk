@@ -1,4 +1,4 @@
-#CodeTalk
+# CodeTalk
 Code Talk is a visual studio extension to make programming in Visual Studio more accessible. The plugin currently concentrates on three main aspects of Programming:
 1. Glanceability
 2. Real-Time Error information 
@@ -8,12 +8,12 @@ This is still in the initial stages of development. Please try it out and give y
 
 ----------
 
-#Getting Started
+# Getting Started
 Download the CodeTalk VSIX Installer here.  
-To know more about CodeTalk features, please visit the [Wiki](https://codetalk.visualstudio.com/CodeTalk/_wiki).  
-To know more about building and testing CodeTalk, please click [here](https://codetalk.visualstudio.com/CodeTalk/_wiki?pagePath=%2FBuilding-and-Testing).
+To know more about CodeTalk features, please visit the [Wiki](https://github.com/Microsoft/CodeTalk/wiki).  
+To know more about building and testing CodeTalk, please click [here](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
 
 ----------
 
-#Contribute
-Mail [codetalk@microsoft.com](mailto:codetalk@microsoft.com) for access. 
+# Contribute
+To contribute to CodeTalk, please visit the wiki [contribution page](https://github.com/Microsoft/CodeTalk/wiki/Contribution).
