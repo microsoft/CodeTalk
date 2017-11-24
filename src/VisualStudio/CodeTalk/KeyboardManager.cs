@@ -204,6 +204,7 @@ namespace Microsoft.CodeTalk
 			AboutControl.CloseFrame();
 			CodeTalkOptionsControl.CloseFrame();
 			TalkpointToolWindowControl.CloseFrame();
+			GetSummaryToolWindowControl.CloseFrame();
 		}
 
         static class SafeNativeMethods
