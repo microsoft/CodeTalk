@@ -13,6 +13,3 @@ To know more about CodeTalk features, please visit the [Wiki](https://github.com
 To know more about building and testing CodeTalk, please click [here](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
 
 ----------
-
-# Contribute
-To contribute to CodeTalk, please visit the wiki [contribution page](https://github.com/Microsoft/CodeTalk/wiki/Contribution).
