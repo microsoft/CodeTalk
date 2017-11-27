@@ -22,13 +22,13 @@ namespace Microsoft.CodeTalk.LanguageService
 
         void VisitUserDefinedType(UserDefinedType udt);
 
-        void VisitClass(Class userClass);
+        void VisitClass(ClassDefinition userClass);
 
-        void VisitStruct(Class userStruct);
+        void VisitStruct(ClassDefinition userStruct);
 
-        void VisitEnum(Entities.UDT.Enum userEnum);
+        void VisitEnum(Entities.UDT.EnumDefinition userEnum);
 
-        void VisitInterface(Interface userInterface);
+        void VisitInterface(InterfaceDefinition userInterface);
 
         void VisitFunction(FunctionDefinition functionDefinition);
 

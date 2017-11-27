@@ -21,48 +21,44 @@ namespace Microsoft.CodeTalk.LanguageService
     {
         internal static UserDefinedType CreateClass(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Class(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new ClassDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Class;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateStruct(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Struct(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new StructDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Struct;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateEnum(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Entities.UDT.Enum(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new Entities.UDT.EnumDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Enum;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateInterface(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Interface(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new InterfaceDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Interface;
 
             return typeObj;
         }

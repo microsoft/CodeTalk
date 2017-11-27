@@ -12,19 +12,11 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.LanguageService.Entities.UDT
 {
-    public class Struct : UserDefinedType
+    public class StructDefinition : InheritableUserDefinedType
     {
-        public Struct(string text, FileSpan fileSpan, ISyntaxEntity parent, CodeFile currentCodeFile) : base(text, fileSpan, parent, currentCodeFile)
+        public StructDefinition(string text, FileSpan fileSpan, ISyntaxEntity parent, CodeFile currentCodeFile) : base(text, fileSpan, parent, currentCodeFile)
         {
-            m_baseClasses = new List<string>();
         }
-
-        internal void AddBaseClassOrInterface(string className)
-        {
-            m_baseClasses.Add(className);
-        }
-
-        public IEnumerable<string> BaseClasses { get { return m_baseClasses; } }
 
         public override SyntaxEntityKind Kind
         {
@@ -34,6 +26,14 @@ namespace Microsoft.CodeTalk.LanguageService.Entities.UDT
             }
         }
 
-        private List<string> m_baseClasses;
-    }
+		public override string SpokenText()
+		{
+			return this.CurrentCodeFile.Language.SpokenText(this);
+		}
+
+		public override string DisplayText()
+		{
+			return base.DisplayText();
+		}
+	}
 }

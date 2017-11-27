@@ -52,22 +52,22 @@ namespace Microsoft.CodeTalk.LanguageService
             VisitChildren(udt);
         }
 
-        public virtual void VisitClass(Class userClass)
+        public virtual void VisitClass(ClassDefinition userClass)
         {
             VisitChildren(userClass);
         }
 
-        public virtual void VisitStruct(Class userStruct)
+        public virtual void VisitStruct(ClassDefinition userStruct)
         {
             VisitChildren(userStruct);
         }
 
-        public virtual void VisitEnum(Entities.UDT.Enum userEnum)
+        public virtual void VisitEnum(Entities.UDT.EnumDefinition userEnum)
         {
             VisitChildren(userEnum);
         }
 
-        public virtual void VisitInterface(Interface userInterface)
+        public virtual void VisitInterface(InterfaceDefinition userInterface)
         {
             VisitChildren(userInterface);
         }

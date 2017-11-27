@@ -132,6 +132,7 @@
     <Compile Include="Entities\FunctionDefinition.cs" />
     <Compile Include="Entities\NamespaceDefinition.cs" />
     <Compile Include="Entities\MemberProperty.cs" />
+    <Compile Include="Entities\UDT\InheritableUDT.cs" />
     <Compile Include="Entities\UDT\Interface.cs" />
     <Compile Include="Entities\UDT\Enum.cs" />
     <Compile Include="Entities\UDT\Struct.cs" />

@@ -128,13 +128,13 @@ namespace Microsoft.CodeTalk.LanguageService
             }
 
             string whichType = String.Empty;
-            switch ( udt.UdtType )
+            switch ( udt.Kind )
             {
-                case TypeOfUdt.Class: whichType = "class";
+                case SyntaxEntityKind.Class: whichType = "class";
                     break;
-                case TypeOfUdt.Interface: whichType = "interface";
+                case SyntaxEntityKind.Interface: whichType = "interface";
                     break;
-                case TypeOfUdt.Struct: whichType = "struct";
+                case SyntaxEntityKind.Struct: whichType = "struct";
                     break;
             }
             // Modified by prvai : Removing access specifiers and storage specifiers.

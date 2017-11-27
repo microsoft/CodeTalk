@@ -28,11 +28,10 @@ namespace Microsoft.CodeTalk.LanguageService
         /// <param name="currentCodeFile">The CodeFile</param>
         /// <param name="parent">the parent</param>
         /// <returns>the UDT from the ClassDefinition node</returns>
-        internal static UserDefinedType createClassUDT(ClassDefinition node, CodeFile currentCodeFile,ISyntaxEntity parent)
+        internal static UserDefinedType createClassUDT(IronPython.Compiler.Ast.ClassDefinition node, CodeFile currentCodeFile,ISyntaxEntity parent)
         {
 
-            UserDefinedType classObject = new Class(node.Name, new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent,currentCodeFile);
-            classObject.UdtType = TypeOfUdt.Class;
+			UserDefinedType classObject = new Entities.UDT.ClassDefinition(node.Name, new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
             return classObject;
         }
 

@@ -87,7 +87,6 @@ namespace Microsoft.CodeTalk.LanguageService
         public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
         {
             var enumObj = CSharpEntityCreationHelper.CreateEnum(node, m_currentParent, m_currentCodeFile, m_currentTree);
-            Debug.Assert(enumObj.UdtType == TypeOfUdt.Enum);
 
             ISyntaxEntity oldParent = setCurrentParent(enumObj);
             base.VisitEnumDeclaration(node);
@@ -101,7 +100,7 @@ namespace Microsoft.CodeTalk.LanguageService
                 throw new InvalidOperationException("Enum Member Declaration node is null!");
             }
             //TODO: Must support Values for enums once we make it a separate class. i.e, enum { X = 0 }
-            (m_currentParent as Entities.UDT.Enum).AddEnumMember(node.Identifier.Text);
+            (m_currentParent as Entities.UDT.EnumDefinition).AddEnumMember(node.Identifier.Text);
             base.VisitEnumMemberDeclaration(node);
         }
         public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -246,7 +245,7 @@ namespace Microsoft.CodeTalk.LanguageService
             {
                 throw new InvalidOperationException("Simple Base Type node is null!");
             }
-            ((m_currentParent as Class)).AddBaseClassOrInterface(node.ChildNodes().First().GetText().ToString());
+            ((m_currentParent as InheritableUserDefinedType)).AddBaseClassOrInterface(node.ChildNodes().First().GetText().ToString());
             base.VisitSimpleBaseType(node);
         }
 
