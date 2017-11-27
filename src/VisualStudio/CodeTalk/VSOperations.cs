@@ -91,55 +91,62 @@ namespace Microsoft.CodeTalk
 
 		public void BreakHandler(dbgEventReason reason, ref dbgExecutionAction execAction)
 		{
-			if (reason == dbgEventReason.dbgEventReasonBreakpoint)
+			try
 			{
-				//Break due to break point
-				var currentBreakpoint = dte.Debugger.BreakpointLastHit;
-				var matchedTalkpoint = MatchTalkPoint(currentBreakpoint);
-				if (null == matchedTalkpoint) { return; }
-				//Go on
-				if (matchedTalkpoint.type == TalkpointType.Tonal)
+				if (reason == dbgEventReason.dbgEventReasonBreakpoint)
 				{
-					if (matchedTalkpoint.isCustomTone)
+					//Break due to break point
+					var currentBreakpoint = dte.Debugger.BreakpointLastHit;
+					var matchedTalkpoint = MatchTalkPoint(currentBreakpoint);
+					if (null == matchedTalkpoint) { return; }
+					//Go on
+					if (matchedTalkpoint.type == TalkpointType.Tonal)
 					{
-						if (null != matchedTalkpoint.customTone)
+						if (matchedTalkpoint.isCustomTone)
 						{
-							PlaySound(matchedTalkpoint.customTone);
+							if (null != matchedTalkpoint.customTone)
+							{
+								PlaySound(matchedTalkpoint.customTone);
+							}
+						}
+						else
+						{
+							PlaySound(matchedTalkpoint.tone);
 						}
 					}
-					else
+					else if (matchedTalkpoint.type == TalkpointType.Textual)
 					{
-						PlaySound(matchedTalkpoint.tone);
+						//Speak the statement
+						Debug.WriteLine(matchedTalkpoint.statement);
+						TextToSpeech.SpeakText(matchedTalkpoint.statement);
 					}
-				}
-				else if (matchedTalkpoint.type == TalkpointType.Textual)
-				{
-					//Speak the statement
-					Debug.WriteLine(matchedTalkpoint.statement);
-					TextToSpeech.SpeakText(matchedTalkpoint.statement);
-				}
-				else if (matchedTalkpoint.type == TalkpointType.Expression)
-				{
-					if (!string.IsNullOrEmpty(matchedTalkpoint.statement))
+					else if (matchedTalkpoint.type == TalkpointType.Expression)
 					{
-						var exp = dte.Debugger.GetExpression(matchedTalkpoint.statement);
-						if (exp.IsValidValue)
+						if (!string.IsNullOrEmpty(matchedTalkpoint.statement))
 						{
-							Debug.WriteLine(exp.Value);
-							TextToSpeech.SpeakText(exp.Value);
+							var exp = dte.Debugger.GetExpression(matchedTalkpoint.statement);
+							if (exp.IsValidValue)
+							{
+								Debug.WriteLine(exp.Value);
+								TextToSpeech.SpeakText(exp.Value);
+							}
 						}
 					}
+					if (matchedTalkpoint.doesContinue)
+					{
+						execAction = dbgExecutionAction.dbgExecutionActionGo;
+					}
 				}
-				if (matchedTalkpoint.doesContinue)
+				else if (reason == dbgEventReason.dbgEventReasonExceptionNotHandled)
 				{
-					execAction = dbgExecutionAction.dbgExecutionActionGo;
+					//Break due to unhandled exception
+					System.Windows.Forms.MessageBox.Show("Break due to excpetion. " +
+													 "Reason: " + reason.ToString());
 				}
 			}
-			else if (reason == dbgEventReason.dbgEventReasonExceptionNotHandled)
+			catch (Exception)
 			{
-				//Break due to unhandled exception
-				System.Windows.Forms.MessageBox.Show("Break due to excpetion. " +
-												 "Reason: " + reason.ToString());
+				//Catching exception to prevent Visual Studio crashing.
 			}
 
 		}
