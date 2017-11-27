@@ -87,111 +87,118 @@ namespace Microsoft.CodeTalk
 		/// <returns></returns>
 		private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
 		{
-			//If window is not in focus, do not do anything
-			if (!IsWindowInFocus) { return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam); }
-
-			//If only Keydown
-			if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
+			try
 			{
-				//Will give the key press for the event.
-				int vkCode = Marshal.ReadInt32(lParam);
-				var key = (Keys)vkCode;
+				//If window is not in focus, do not do anything
+				if (!IsWindowInFocus) { return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam); }
 
-				//If the key pressers are modifier keys, exit the callback
-				if (key == Keys.Control || key == Keys.Shift
-					|| key == Keys.CapsLock || key == Keys.Insert
-					|| key == Keys.LControlKey || key == Keys.RControlKey
-					|| key == Keys.LShiftKey || key == Keys.RShiftKey)
+				//If only Keydown
+				if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
 				{
-					//Do nothing
-					return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
-				}
+					//Will give the key press for the event.
+					int vkCode = Marshal.ReadInt32(lParam);
+					var key = (Keys)vkCode;
 
-				//If autonmatic error detection is enabled, reset timer
-				if (Constants.AutomaticErrorDetectEnabled)
-				{
-					//Automatic Error detection timer
-					if (null != ErrorDetectTimer) { ErrorDetectTimer.Dispose(); }
-					//Create the timer
-					ErrorDetectTimer = new System.Threading.Timer((s) =>
+					//If the key pressers are modifier keys, exit the callback
+					if (key == Keys.Control || key == Keys.Shift
+						|| key == Keys.CapsLock || key == Keys.Insert
+						|| key == Keys.LControlKey || key == Keys.RControlKey
+						|| key == Keys.LShiftKey || key == Keys.RShiftKey)
 					{
-						bool isActiveWindowFocussed = TalkCodePackage.vsOperations.IsActiveDocumentFocussed();
-						if (!isActiveWindowFocussed) { return; }
+						//Do nothing
+						return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
+					}
+
+					//If autonmatic error detection is enabled, reset timer
+					if (Constants.AutomaticErrorDetectEnabled)
+					{
+						//Automatic Error detection timer
+						if (null != ErrorDetectTimer) { ErrorDetectTimer.Dispose(); }
+						//Create the timer
+						ErrorDetectTimer = new System.Threading.Timer((s) =>
+						{
+							bool isActiveWindowFocussed = TalkCodePackage.vsOperations.IsActiveDocumentFocussed();
+							if (!isActiveWindowFocussed) { return; }
 						//Call the error detector
 						System.Diagnostics.Debug.WriteLine("Detect Error");
-						Task.Run(() =>
-						{
-							TalkCodePackage.vsOperations.PlaySoundIfError();
-						});
+							Task.Run(() =>
+							{
+								TalkCodePackage.vsOperations.PlaySoundIfError();
+							});
 
-					}, null, Constants.ErrorDetectWaitTimeMilliseconds, Timeout.Infinite);
-				}
+						}, null, Constants.ErrorDetectWaitTimeMilliseconds, Timeout.Infinite);
+					}
 
-				//Check for command mode
-				if (!IsCommandMode && key == TalkCodePackage.currentCodeTalkConfig.CodeTalkKey)
-				{
-					if (IsKeyPressed(TalkCodePackage.currentCodeTalkConfig.CodeTalkModifierKey))
+					//Check for command mode
+					if (!IsCommandMode && key == TalkCodePackage.currentCodeTalkConfig.CodeTalkKey)
 					{
-						//Control + ~ pressed : Enable command mode, which will exipre in few seconds
-						//System.Diagnostics.Debug.WriteLine("Control + Tilde");
-						IsCommandMode = true;
-						if (null != CommandModeTimer) { CommandModeTimer.Dispose(); }
-
-						//Expiration timer for command mode
-						CommandModeTimer = new System.Threading.Timer((s) =>
+						if (IsKeyPressed(TalkCodePackage.currentCodeTalkConfig.CodeTalkModifierKey))
 						{
+							//Control + ~ pressed : Enable command mode, which will exipre in few seconds
+							//System.Diagnostics.Debug.WriteLine("Control + Tilde");
+							IsCommandMode = true;
+							if (null != CommandModeTimer) { CommandModeTimer.Dispose(); }
+
+							//Expiration timer for command mode
+							CommandModeTimer = new System.Threading.Timer((s) =>
+							{
 							//Disable the command mode
 							IsCommandMode = false;
 
-						}, null, Constants.CommandModeWaitTimeMilliseconds, Timeout.Infinite);
-						//Don't pass the control
-						return (IntPtr)1;
-					}
-					//else do nothing
-					return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
-				}
-
-				//If Escape, then close windows
-				if (key == Keys.Escape && !IsCtrlPressed())
-				{
-					//Close all windows
-					CloseAllCodeTalkFrames();
-				}
-
-				//Exit if not in command mode
-				if (!IsCommandMode)
-				{
-					//Do nothing
-					return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
-				}
-
-				//Find the appropriate command and execute it
-				try
-				{
-					//disable command mode.
-					IsCommandMode = false;
-					CommandModeTimer.Dispose();
-					CommandModeTimer = null;
-
-					var command = TalkCodePackage.currentCodeTalkConfig.GetCommands().Where(c => c.Keys.CommandKey == key).FirstOrDefault();
-
-					if (null != command && IsKeyPressed(command.Keys.CommandModifierKey))
-					{
-						command.Execute();
-
-						if (command.PassControl())
-						{
-							return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
+							}, null, Constants.CommandModeWaitTimeMilliseconds, Timeout.Infinite);
+							//Don't pass the control
+							return (IntPtr)1;
 						}
+						//else do nothing
+						return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
+					}
 
-						//Exit without passing control
-						return (IntPtr)1;
+					//If Escape, then close windows
+					if (key == Keys.Escape && !IsCtrlPressed())
+					{
+						//Close all windows
+						CloseAllCodeTalkFrames();
+					}
+
+					//Exit if not in command mode
+					if (!IsCommandMode)
+					{
+						//Do nothing
+						return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
+					}
+
+					//Find the appropriate command and execute it
+					try
+					{
+						//disable command mode.
+						IsCommandMode = false;
+						CommandModeTimer.Dispose();
+						CommandModeTimer = null;
+
+						var command = TalkCodePackage.currentCodeTalkConfig.GetCommands().Where(c => c.Keys.CommandKey == key).FirstOrDefault();
+
+						if (null != command && IsKeyPressed(command.Keys.CommandModifierKey))
+						{
+							command.Execute();
+
+							if (command.PassControl())
+							{
+								return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);
+							}
+
+							//Exit without passing control
+							return (IntPtr)1;
+						}
+					}
+					catch (Exception e)
+					{
+						System.Diagnostics.Debug.WriteLine(e.StackTrace);
 					}
 				}
-				catch (Exception e)
-				{
-					System.Diagnostics.Debug.WriteLine(e.StackTrace);
-				}
+			}
+			catch (Exception exp)
+			{
+				System.Diagnostics.Debug.WriteLine(exp.StackTrace);
 			}
 			//To pass it along
 			return SafeNativeMethods.CallNextHookEx(_hookID, nCode, wParam, lParam);

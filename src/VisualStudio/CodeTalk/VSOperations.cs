@@ -430,15 +430,22 @@ namespace Microsoft.CodeTalk
 
 		public bool IsActiveDocumentFocussed()
 		{
-			if (null != focussedWindow && null != focussedWindow.Document)
+			try
 			{
-				//If current focussed and has a document, compare the path
-				var focussedDocumentPath = GetDocumentPath(focussedWindow.Document);
-				var activeDocumentPath = GetActiveDocumentPath();
-				if (focussedDocumentPath.Equals(activeDocumentPath))
+				if (null != focussedWindow && null != focussedWindow.Document)
 				{
-					return true;
+					//If current focussed and has a document, compare the path
+					var focussedDocumentPath = GetDocumentPath(focussedWindow.Document);
+					var activeDocumentPath = GetActiveDocumentPath();
+					if (focussedDocumentPath.Equals(activeDocumentPath))
+					{
+						return true;
+					}
 				}
+			}
+			catch (Exception)
+			{
+				//The active document can be disposed
 			}
 			return false;
 		}
