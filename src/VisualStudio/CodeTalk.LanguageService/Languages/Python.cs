@@ -143,8 +143,7 @@ namespace Microsoft.CodeTalk.LanguageService
 
         public string SpokenText(NamespaceDefinition names)
         {
-            //TODO: Must implement this correctly. 
-            return string.Empty; //will this get called? 
+            return string.Empty;
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Microsoft.CodeTalk.LanguageService
 
 		public override string SpokenText()
 		{
-			//todo: change the ILanguage interface.
 			return this.Kind.ToString() + " at line " + this.Location.StartLineNumber;
 		}
 

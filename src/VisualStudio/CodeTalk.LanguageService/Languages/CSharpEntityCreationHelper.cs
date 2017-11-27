@@ -222,13 +222,13 @@ namespace Microsoft.CodeTalk.LanguageService
                         break;
                     case SyntaxKind.ExplicitKeyword:
                         break;
-                    case SyntaxKind.ExternKeyword: /* TODO: handle this in the function part */
+                    case SyntaxKind.ExternKeyword: 
                         break;
-                    case SyntaxKind.VirtualKeyword: //TODO: Cannot ignore this
+                    case SyntaxKind.VirtualKeyword: 
                         break;
-                    case SyntaxKind.UnsafeKeyword://TODO: Cannot ignore this
+                    case SyntaxKind.UnsafeKeyword:
                         break;
-                    case SyntaxKind.NewKeyword://TODO: Cannot ignore this
+                    case SyntaxKind.NewKeyword:
                         break;
                     default:
                         throw new NotSupportedException(String.Format(CultureInfo.InvariantCulture, "Keyword {0} is not supported", modifier.Text));
@@ -304,8 +304,6 @@ namespace Microsoft.CodeTalk.LanguageService
 
         internal static FormalParameter CreateFormalParameter(ParameterSyntax node)
         {
-            //TODO: For demo. LINQ parameter syntax will conflict with regular function syntax. So, we are 
-            //checking here for node.Type == null.
             FormalParameter fp = new FormalParameter(node.Type != null ? node.Type.ToFullString().Trim() : String.Empty, node.Identifier.Text);
             foreach (var modifier in node.Modifiers)
             {
@@ -394,10 +392,7 @@ namespace Microsoft.CodeTalk.LanguageService
 
                 var comment = new Comment(commentText, overallSpan, owner, currentCodeFile);
                 comment.Parent = owner;
-                //TODO: This is a hassle. Ideally, every time we parse a file and get a CF object,
-                //we should do a walk and collect all comments. In fact, we should have a generic 
-                //walker that runs everytime the parse() is called and simply collects whatever 
-                //it needs to collect. 
+                
                 currentCodeFile.AddComment(comment);
                 return comment;
             }

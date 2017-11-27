@@ -99,7 +99,6 @@ namespace Microsoft.CodeTalk.LanguageService
             {
                 throw new InvalidOperationException("Enum Member Declaration node is null!");
             }
-            //TODO: Must support Values for enums once we make it a separate class. i.e, enum { X = 0 }
             (m_currentParent as Entities.UDT.EnumDefinition).AddEnumMember(node.Identifier.Text);
             base.VisitEnumMemberDeclaration(node);
         }

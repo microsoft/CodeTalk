@@ -16,7 +16,7 @@ namespace Microsoft.CodeTalk.LanguageService
     public enum FunctionTypes {  None = 0, Constructor = 1, Destructor = 2, MemberFunction = 4, External = 8, GlobalFunction = 16, AnonymousFunction = 32, Delegate = 64, AnonymousDelegate = 128, Operator = 256, ConversionOperator = 512 };
 
     /// <summary>
-    /// TODO: Must create a proper hierarchy for functions and UDTs. 
+    /// 
     /// </summary>
     public class FunctionDefinition : AbstractAddressableEntity
     {
