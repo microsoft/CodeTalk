@@ -36,14 +36,14 @@ namespace Microsoft.CodeTalk.LanguageService.Entities.UDT
 
         private List<string> m_enumMembers;
 
-		public override string SpokenText()
-		{
-			return this.CurrentCodeFile.Language.SpokenText(this);
-		}
+        public override string SpokenText()
+        {
+            return this.CurrentCodeFile.Language.SpokenText(this);
+        }
 
-		public override string DisplayText()
-		{
-			return base.DisplayText();
-		}
-	}
+        public override string DisplayText()
+        {
+            return base.DisplayText();
+        }
+    }
 }

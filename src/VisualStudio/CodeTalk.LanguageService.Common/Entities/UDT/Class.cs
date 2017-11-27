@@ -25,15 +25,5 @@ namespace Microsoft.CodeTalk.LanguageService.Entities.UDT
                 return SyntaxEntityKind.Class;
             }
         }
-
-		public override string SpokenText()
-		{
-			return this.CurrentCodeFile.Language.SpokenText(this);
-		}
-
-		public override string DisplayText()
-		{
-			return base.DisplayText();
-		}
-	}
+    }
 }
