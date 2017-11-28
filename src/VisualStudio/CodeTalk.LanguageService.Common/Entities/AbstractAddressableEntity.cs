@@ -13,10 +13,6 @@ namespace Microsoft.CodeTalk.LanguageService
 {
     public abstract class AbstractAddressableEntity : AbstractSyntaxEntity
     {
-        //internal AbstractEntityWithStorage()
-        //{
-        //    init();
-        //}
 
         internal AbstractAddressableEntity(string name, FileSpan loc, ISyntaxEntity parent, CodeFile currentCodeFile)
             : base(name, loc, parent, currentCodeFile)

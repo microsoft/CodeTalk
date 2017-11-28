@@ -31,15 +31,5 @@ namespace Microsoft.CodeTalk.LanguageService
 		{
 			visitor?.VisitTry(this);
 		}
-
-		public override string SpokenText()
-		{
-			return this.Kind.ToString() + " at line " + this.Location.StartLineNumber;
-		}
-
-		public override string DisplayText()
-		{
-			return this.Kind.ToString() + " at line " + this.Location.StartLineNumber;
-		}
 	}
 }

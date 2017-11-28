@@ -127,16 +127,8 @@ namespace Microsoft.CodeTalk.LanguageService
                 return String.Empty;
             }
 
-            string whichType = String.Empty;
-            switch ( udt.Kind )
-            {
-                case SyntaxEntityKind.Class: whichType = "class";
-                    break;
-                case SyntaxEntityKind.Interface: whichType = "interface";
-                    break;
-                case SyntaxEntityKind.Struct: whichType = "struct";
-                    break;
-            }
+            string whichType = udt.Kind.ToString();
+
             // Modified by prvai : Removing access specifiers and storage specifiers.
             return /*udt.AccessSpecifiers.ToString() + " " + udt.StorageSpecifiers + " " +*/ whichType + " " + udt.Name + " at line " + udt.Location.StartLineNumber;
         }
