@@ -65,7 +65,7 @@ namespace Microsoft.CodeTalk
         internal CursorPos position;
         internal bool doesContinue;
 
-        public Talkpoint(string filePath, CursorPos position, bool doesContinue)
+        public Talkpoint(string filePath, CursorPos position, bool doesContinue = false)
         {
             this.filePath = filePath;
             this.position = position;
