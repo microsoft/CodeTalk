@@ -3,8 +3,10 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
+using Microsoft.CodeTalk.LanguageService.Properties;
 using System;
 using System.Diagnostics;
+using System.Resources;
 
 namespace Microsoft.CodeTalk.LanguageService
 {
@@ -13,9 +15,7 @@ namespace Microsoft.CodeTalk.LanguageService
         protected Block(string name, FileSpan location, ISyntaxEntity parent, CodeFile currentCodeFile) 
             : base(name, location, parent, currentCodeFile)
         {
-            //Edited by prvai : need not be true.
-            //Debug.Assert(parent.Kind == SyntaxEntityKind.Function, "A block can only have a function as parent.");
-
+            
         }
 
         public override SyntaxEntityKind Kind
@@ -33,12 +33,14 @@ namespace Microsoft.CodeTalk.LanguageService
 
         public override string SpokenText()
         {
-            return base.SpokenText();
-        }
+			ResourceManager rm = new ResourceManager(typeof(Resources));
+			return $"{this.Kind} {rm.GetString("AtLine")} {this.Location.StartLineNumber}";
+		}
 
         public override string DisplayText()
         {
-            return base.DisplayText();
-        }
+			ResourceManager rm = new ResourceManager(typeof(Resources));
+			return $"{this.Kind} {rm.GetString("AtLine")} {this.Location.StartLineNumber}";
+		}
     }
 }
