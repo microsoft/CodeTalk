@@ -11,7 +11,7 @@ using Microsoft.Pex.Framework;
 using Microsoft.Pex.Framework.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-
+using Microsoft.CodeTalk.LanguageService.Entities.UDT;
 
 namespace Microsoft.CodeTalk.LanguageService.Languages.Tests
 {
@@ -167,10 +167,10 @@ namespace Microsoft.CodeTalk.LanguageService.Languages.Tests
             CSharp lang = new CSharp();
             CodeFile cf = lang.Parse(System.IO.File.ReadAllText(@".\Programs\CSharp\Enums.txt"), @".\Programs\CSharp\Enums.txt");
 
-            var enumT = (cf.Children.First().Children.First() as UserDefinedType);
+            var enumT = (cf.Children.First().Children.First() as EnumDefinition);
             Assert.AreEqual("Types", enumT.Name);
             Assert.AreEqual(3, enumT.EnumMembers.Count());
-            Assert.IsTrue(enumT.UdtType == TypeOfUdt.Enum);
+            Assert.IsTrue(enumT.Kind == SyntaxEntityKind.Enum);
         }
 
         private void processFolder (string folderName, string[] foldersToSkip)

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.LanguageService.Entities.UDT
 {
-    public class EnumDefinition : UserDefinedType
+    public class EnumDefinition : InheritableUserDefinedType
     {
         public EnumDefinition(string text, FileSpan fileSpan, ISyntaxEntity parent, CodeFile currentCodeFile) : base(text, fileSpan, parent, currentCodeFile)
         {

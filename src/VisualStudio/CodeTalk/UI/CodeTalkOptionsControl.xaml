@@ -50,7 +50,7 @@
 							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.FunctionsListModifierText}"/>
 							<ComboBox Name="GetFunctionsModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.FunctionsListModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
 							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.GetFunctionsKeyText}"/>
-							<ComboBox Name="GetFunctionsKeyCombobox"  AutomationProperties.Name="" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+                            <ComboBox Name="GetFunctionsKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetFunctionsKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
 						</Grid>
 					</StackPanel>
 
@@ -68,7 +68,7 @@
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
 							<TextBlock Grid.Column="0" Text="{x:Static p:Resources.GetSummaryModifierText}"/>
-							<ComboBox Name="GetSummaryModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetSummaryKeyAutomationText}" Grid.Column="1" MinWidth="100"/>
+							<ComboBox Name="GetSummaryModifierKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetSummaryModifierAutomationText}" Grid.Column="1" MinWidth="100"/>
 							<TextBlock Grid.Column="0" Grid.Row="1" Margin="0 5 0 5" Text="{x:Static p:Resources.GetSummaryKey}"/>
 							<ComboBox Name="GetSummaryKeyCombobox"  AutomationProperties.Name="{x:Static p:Resources.GetSummaryKeyAutomationText}" Margin="0 5 0 5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
 						</Grid>
