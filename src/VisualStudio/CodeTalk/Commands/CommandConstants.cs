@@ -167,8 +167,8 @@ namespace Microsoft.CodeTalk.Commands
 		//Default CodeTalkConfig
 		internal static CodeTalkConfig DefualtCodeTalkConfig = new CodeTalkConfig()
 		{
-			CodeTalkKey = Keys.Oemtilde,
-			CodeTalkKeyString = KeyNamesMap[Keys.Oemtilde],
+			CodeTalkKey = Keys.D1,
+			CodeTalkKeyString = KeyNamesMap[Keys.D1],
 			CodeTalkModifierKey = ModifierKeys.Control,
 			GetFunctionsCommandKeyConfig = new CommandKeyConfig()
 			{
