@@ -19,7 +19,7 @@ namespace Microsoft.CodeTalk.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -439,7 +439,7 @@ namespace Microsoft.CodeTalk.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move to Context Command Modifer Key.
+        ///   Looks up a localized string similar to Move to Context Command Modifier Key selection.
         /// </summary>
         public static string MoveToContextModifierAutomation {
             get {
@@ -601,7 +601,7 @@ namespace Microsoft.CodeTalk.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TalkPointModifierText.
+        ///   Looks up a localized string similar to Add TalkPoint Command Modifier Key Selection.
         /// </summary>
         public static string TalkPointModifierAutomationText {
             get {

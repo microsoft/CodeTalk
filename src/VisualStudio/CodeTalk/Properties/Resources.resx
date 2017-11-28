@@ -283,7 +283,7 @@
     <comment>Display text for MoveToContext command key selection.</comment>
   </data>
   <data name="MoveToContextModifierAutomation" xml:space="preserve">
-    <value>Move to Context Command Modifer Key</value>
+    <value>Move to Context Command Modifier Key selection</value>
     <comment>AutomationProperties.Name string for MoveToContext modifier selection combobox</comment>
   </data>
   <data name="MoveToContextModifierText" xml:space="preserve">
@@ -355,7 +355,7 @@
     <comment>Display text for add TalkPoint command key selection.</comment>
   </data>
   <data name="TalkPointModifierAutomationText" xml:space="preserve">
-    <value>TalkPointModifierText</value>
+    <value>Add TalkPoint Command Modifier Key Selection</value>
     <comment>AutomationProperties.Name string for add TalkPoint modifier key selection combobox.</comment>
   </data>
   <data name="TalkPointModifierText" xml:space="preserve">
