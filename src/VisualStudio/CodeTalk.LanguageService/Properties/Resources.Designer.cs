@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeTalk.LanguageService.Properties {
+namespace Microsoft.CodeTalk.LanguageService.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CodeTalk.LanguageService.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeTalk.LanguageService.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.CodeTalk.LanguageService.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace CodeTalk.LanguageService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to at line .
+        ///   Looks up a localized string similar to at line.
         /// </summary>
         internal static string AtLine {
             get {
@@ -70,7 +70,7 @@ namespace CodeTalk.LanguageService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to function .
+        ///   Looks up a localized string similar to function.
         /// </summary>
         internal static string Function {
             get {
@@ -79,7 +79,7 @@ namespace CodeTalk.LanguageService.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Python .
+        ///   Looks up a localized string similar to Pyrhon.
         /// </summary>
         internal static string PythonString {
             get {

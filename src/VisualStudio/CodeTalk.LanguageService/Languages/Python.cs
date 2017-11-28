@@ -23,7 +23,7 @@ using Microsoft.Scripting.Runtime;
 using System.Diagnostics;
 using System.Globalization;
 using System.Resources;
-using CodeTalk.LanguageService.Properties;
+using Microsoft.CodeTalk.LanguageService.Properties;
 //using Microsoft.PythonTools.Parsing;
 
 namespace Microsoft.CodeTalk.LanguageService
