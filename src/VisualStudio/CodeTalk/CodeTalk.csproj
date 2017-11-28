@@ -73,6 +73,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Talkpoints\ExpressionTalkpoint.cs" />
+    <Compile Include="Talkpoints\TextTalkpoint.cs" />
+    <Compile Include="Talkpoints\ToneTalkpoint.cs" />
     <Compile Include="UI\About.cs" />
     <Compile Include="UI\AboutCommand.cs" />
     <Compile Include="UI\AboutControl.xaml.cs">
@@ -92,7 +95,7 @@
     <Compile Include="Commands\MoveToContextCommand.cs" />
     <Compile Include="Commands\SkipCommentCommand.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Talkpoint.cs" />
+    <Compile Include="Talkpoints\Talkpoint.cs" />
     <Compile Include="TextToSpeech.cs" />
     <Compile Include="UI\FunctionsListToolWindow.cs" />
     <Compile Include="UI\FunctionsListToolWindowCommand.cs" />

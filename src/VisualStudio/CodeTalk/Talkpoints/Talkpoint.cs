@@ -59,37 +59,20 @@ namespace Microsoft.CodeTalk
         Expression
     }
 
-    public class Talkpoint
+    public abstract class Talkpoint
     {
         internal string filePath;
-		internal CursorPos position;
-		internal bool doesContinue;
-		internal TalkpointType type;
-		internal string statement;
-		internal Tones tone;
-		internal bool isCustomTone;
-		internal CustomTone customTone;
+        internal CursorPos position;
+        internal bool doesContinue;
 
-        public Talkpoint(TalkpointType type, string filePath, CursorPos position, string statement = "", bool doesContinue = false, Tones tone = Tones.error1, bool isCustomTone = false, CustomTone customTonePath = null)
+        public Talkpoint(string filePath, CursorPos position, bool doesContinue)
         {
             this.filePath = filePath;
             this.position = position;
             this.doesContinue = doesContinue;
-            this.statement = statement;
-            this.type = type;
-			this.tone = tone;
-			this.isCustomTone = isCustomTone;
-			this.customTone = customTonePath;
         }
 
-        public Talkpoint(Breakpoint breakpoint)
-        {
-            this.filePath = breakpoint.File;
-            position = new CursorPos(breakpoint.FileLine, breakpoint.FileColumn);
-            this.doesContinue = false;
-            this.statement = string.Empty;
-            this.type = TalkpointType.Tonal;
-        }
+        public abstract void Execute();
 
         public override bool Equals(object obj)
         {
