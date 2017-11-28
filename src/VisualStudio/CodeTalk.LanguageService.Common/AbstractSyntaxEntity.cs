@@ -12,9 +12,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.LanguageService
 {
-	//TODO: The current hierarchy is not deep enough. Must add more derived entities 
-	//like Invokeable for functions and UDT for classes, structs and interfaces, and
-	//must have separate classes for all of them. 
 	public abstract class AbstractSyntaxEntity : ISyntaxEntity
 	{
 		/// <summary>

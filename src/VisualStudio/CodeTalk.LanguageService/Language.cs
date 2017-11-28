@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using CodeTalk.LanguageService.Properties;
+using Microsoft.CodeTalk.LanguageService.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

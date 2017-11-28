@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AtLine" xml:space="preserve">
-    <value>at line </value>
-    <comment>String to add the phrase "at line" to the spoken text.</comment>
+    <value>at line</value>
+    <comment>String to add the "at line" phrase</comment>
   </data>
   <data name="Function" xml:space="preserve">
-    <value>function </value>
-    <comment>String to add the phrase "function' to the spoken text</comment>
+    <value>function</value>
+    <comment>String to add "function" word</comment>
   </data>
   <data name="PythonString" xml:space="preserve">
-    <value>Python </value>
-    <comment>String for the word "python"</comment>
+    <value>Pyrhon</value>
+    <comment>String to add "Python" word</comment>
   </data>
 </root>

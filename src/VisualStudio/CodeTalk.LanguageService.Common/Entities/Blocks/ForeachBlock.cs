@@ -31,16 +31,5 @@ namespace Microsoft.CodeTalk.LanguageService
 		{
 			visitor?.VisitForEach(this);
 		}
-
-		public override string SpokenText()
-		{
-			//todo: change the ILanguage interface.
-			return this.Kind.ToString() + " at line " + this.Location.StartLineNumber;
-		}
-
-		public override string DisplayText()
-		{
-			return this.Kind.ToString() + " at line " + this.Location.StartLineNumber;
-		}
 	}
 }

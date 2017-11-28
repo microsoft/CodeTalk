@@ -28,7 +28,6 @@ namespace Microsoft.CodeTalk.LanguageService.Languages.Tests
         {
             CodeFile result = target.Parse(programText, "");
             return result;
-            // TODO: add assertions to method CSharpTest.CompileTest(CSharp, String)
         }
 
 

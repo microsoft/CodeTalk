@@ -23,7 +23,7 @@ using Microsoft.Scripting.Runtime;
 using System.Diagnostics;
 using System.Globalization;
 using System.Resources;
-using CodeTalk.LanguageService.Properties;
+using Microsoft.CodeTalk.LanguageService.Properties;
 //using Microsoft.PythonTools.Parsing;
 
 namespace Microsoft.CodeTalk.LanguageService
@@ -143,8 +143,7 @@ namespace Microsoft.CodeTalk.LanguageService
 
         public string SpokenText(NamespaceDefinition names)
         {
-            //TODO: Must implement this correctly. 
-            return string.Empty; //will this get called? 
+            return string.Empty;
         }
     }
 }

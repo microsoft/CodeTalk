@@ -21,48 +21,44 @@ namespace Microsoft.CodeTalk.LanguageService
     {
         internal static UserDefinedType CreateClass(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Class(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new ClassDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Class;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateStruct(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Struct(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new StructDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Struct;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateEnum(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Entities.UDT.Enum(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new Entities.UDT.EnumDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Enum;
 
             return typeObj;
         }
 
         internal static UserDefinedType CreateInterface(BaseTypeDeclarationSyntax node, ISyntaxEntity parent, CodeFile currentCodeFile, SyntaxTree tree)
         {
-            UserDefinedType typeObj = new Interface(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
+            UserDefinedType typeObj = new InterfaceDefinition(node.Identifier.Text, new FileSpan(tree.GetLineSpan(node.Span)), parent, currentCodeFile);
 
             processModifiers(typeObj, node.Modifiers);
             typeObj.AccessSpecifiers = typeObj.AccessSpecifiers == AccessSpecifiers.None ? AccessSpecifiers.Internal : typeObj.AccessSpecifiers;
             typeObj.AssociatedComment = GetComment(typeObj, node, tree, currentCodeFile);
-            typeObj.UdtType = TypeOfUdt.Interface;
 
             return typeObj;
         }
@@ -226,13 +222,13 @@ namespace Microsoft.CodeTalk.LanguageService
                         break;
                     case SyntaxKind.ExplicitKeyword:
                         break;
-                    case SyntaxKind.ExternKeyword: /* TODO: handle this in the function part */
+                    case SyntaxKind.ExternKeyword: 
                         break;
-                    case SyntaxKind.VirtualKeyword: //TODO: Cannot ignore this
+                    case SyntaxKind.VirtualKeyword: 
                         break;
-                    case SyntaxKind.UnsafeKeyword://TODO: Cannot ignore this
+                    case SyntaxKind.UnsafeKeyword:
                         break;
-                    case SyntaxKind.NewKeyword://TODO: Cannot ignore this
+                    case SyntaxKind.NewKeyword:
                         break;
                     default:
                         throw new NotSupportedException(String.Format(CultureInfo.InvariantCulture, "Keyword {0} is not supported", modifier.Text));
@@ -308,8 +304,6 @@ namespace Microsoft.CodeTalk.LanguageService
 
         internal static FormalParameter CreateFormalParameter(ParameterSyntax node)
         {
-            //TODO: For demo. LINQ parameter syntax will conflict with regular function syntax. So, we are 
-            //checking here for node.Type == null.
             FormalParameter fp = new FormalParameter(node.Type != null ? node.Type.ToFullString().Trim() : String.Empty, node.Identifier.Text);
             foreach (var modifier in node.Modifiers)
             {
@@ -398,10 +392,7 @@ namespace Microsoft.CodeTalk.LanguageService
 
                 var comment = new Comment(commentText, overallSpan, owner, currentCodeFile);
                 comment.Parent = owner;
-                //TODO: This is a hassle. Ideally, every time we parse a file and get a CF object,
-                //we should do a walk and collect all comments. In fact, we should have a generic 
-                //walker that runs everytime the parse() is called and simply collects whatever 
-                //it needs to collect. 
+                
                 currentCodeFile.AddComment(comment);
                 return comment;
             }

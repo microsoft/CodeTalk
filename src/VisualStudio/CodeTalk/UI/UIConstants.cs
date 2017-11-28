@@ -33,7 +33,6 @@ namespace Microsoft.CodeTalk.UI
 
 		internal static string GetImageSourceFromKind(ISyntaxEntity node)
 		{
-			//ToDo : Cleanup string compare for Language type
 			if (null == node)
 			{
 				return string.Empty;

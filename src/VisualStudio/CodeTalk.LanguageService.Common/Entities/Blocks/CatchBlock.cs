@@ -39,7 +39,6 @@ namespace Microsoft.CodeTalk.LanguageService
 
 		public override string SpokenText()
 		{
-			//todo: change the ILanguage interface.
 			var whenStr = (string.IsNullOrEmpty(this.CatchFilterClause)) ? string.Empty : String.Format(CultureInfo.InvariantCulture, " when ({0})", this.CatchFilterClause);
 			return String.Format(CultureInfo.InvariantCulture, "{0} ({1}){2} at line {3}", this.Kind.ToString(), this.CatchType, whenStr, this.Location.StartLineNumber);
 		}
