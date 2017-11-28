@@ -22,6 +22,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using static Microsoft.CodeTalk.Constants;
+using Microsoft.CodeTalk.Talkpoints;
 
 namespace Microsoft.CodeTalk
 {
@@ -100,38 +101,8 @@ namespace Microsoft.CodeTalk
                     var matchedTalkpoint = MatchTalkPoint(currentBreakpoint);
                     if (null == matchedTalkpoint) { return; }
                     //Go on
-                    if (matchedTalkpoint.type == TalkpointType.Tonal)
-                    {
-                        if (matchedTalkpoint.isCustomTone)
-                        {
-                            if (null != matchedTalkpoint.customTone)
-                            {
-                                PlaySound(matchedTalkpoint.customTone);
-                            }
-                        }
-                        else
-                        {
-                            PlaySound(matchedTalkpoint.tone);
-                        }
-                    }
-                    else if (matchedTalkpoint.type == TalkpointType.Textual)
-                    {
-                        //Speak the statement
-                        Debug.WriteLine(matchedTalkpoint.statement);
-                        TextToSpeech.SpeakText(matchedTalkpoint.statement);
-                    }
-                    else if (matchedTalkpoint.type == TalkpointType.Expression)
-                    {
-                        if (!string.IsNullOrEmpty(matchedTalkpoint.statement))
-                        {
-                            var exp = dte.Debugger.GetExpression(matchedTalkpoint.statement);
-                            if (exp.IsValidValue)
-                            {
-                                Debug.WriteLine(exp.Value);
-                                TextToSpeech.SpeakText(exp.Value);
-                            }
-                        }
-                    }
+                    matchedTalkpoint.Execute();
+
                     if (matchedTalkpoint.doesContinue)
                     {
                         execAction = dbgExecutionAction.dbgExecutionActionGo;
@@ -149,6 +120,11 @@ namespace Microsoft.CodeTalk
                 //Catching exception to prevent Visual Studio crashing.
             }
 
+        }
+
+        public EnvDTE.Expression RunExpressionInDebugger(string expression)
+        {
+            return dte.Debugger.GetExpression(expression);
         }
 
         Talkpoint MatchTalkPoint(Breakpoint breakpoint)
@@ -169,7 +145,7 @@ namespace Microsoft.CodeTalk
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-                Talkpoint talkpoint = new Talkpoint(type: TalkpointType.Tonal, filePath: filePath, position: cursorPos, doesContinue: doesContinue, tone: tone);
+                Talkpoint talkpoint = new ToneTalkpoint(filePath, cursorPos, doesContinue, tone);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
@@ -190,7 +166,7 @@ namespace Microsoft.CodeTalk
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-                Talkpoint talkpoint = new Talkpoint(type: TalkpointType.Tonal, filePath: filePath, position: cursorPos, doesContinue: doesContinue, isCustomTone: true, customTonePath: customTone);
+                Talkpoint talkpoint = new ToneTalkpoint(filePath, cursorPos, doesContinue, customTone);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
@@ -211,7 +187,7 @@ namespace Microsoft.CodeTalk
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-                Talkpoint talkpoint = new Talkpoint(type: TalkpointType.Textual, filePath: filePath, position: cursorPos, doesContinue: doesContinue, statement: statement);
+                Talkpoint talkpoint = new TextTalkpoint(filePath, cursorPos, doesContinue, statement);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
@@ -220,7 +196,7 @@ namespace Microsoft.CodeTalk
             }
         }
 
-        public void AddExpressionTalkpointToCurrentLine(string statement, bool doesContinue)
+        public void AddExpressionTalkpointToCurrentLine(string expression, bool doesContinue)
         {
             try
             {
@@ -232,7 +208,7 @@ namespace Microsoft.CodeTalk
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-                Talkpoint talkpoint = new Talkpoint(type: TalkpointType.Expression, filePath: filePath, position: cursorPos, doesContinue: doesContinue, statement: statement);
+                Talkpoint talkpoint = new ExpressionTalkpoint(filePath, cursorPos, doesContinue, expression);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
