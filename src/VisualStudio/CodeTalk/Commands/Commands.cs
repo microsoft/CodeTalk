@@ -277,7 +277,7 @@ namespace Microsoft.CodeTalk.Commands
 			rm = new ResourceManager(typeof(Resources));
 			Debug.WriteLine("Create Breakpoint");
 
-            if (TalkCodePackage.vsOperations.RemoveTalkpointIfExists()) { return; }
+            if (TalkCodePackage.vsOperations.RemoveBreakpointIfExists()) { return; }
 
             ToolWindowPane talkpointWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(TalkpointToolWindow), 0, true);
 
