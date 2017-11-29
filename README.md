@@ -1,5 +1,5 @@
 # CodeTalk
-Code Talk is a step to make programming IDEs more accessible. The plugin currently concentrates on three main aspects of Programming:
+Code Talk is a step towards making programming IDEs more accessible. The plugin currently concentrates on three main aspects of Programming:
 1. Glanceability
 2. Real-Time Error information 
 3. Accessible Debugging
