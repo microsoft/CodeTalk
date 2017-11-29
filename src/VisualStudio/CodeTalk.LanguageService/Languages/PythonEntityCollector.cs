@@ -97,20 +97,55 @@ namespace Microsoft.CodeTalk.LanguageService
             base.PostWalk(node);
         }
 
-        /// <summary>
-        /// Not realy sure of this override's purpose. may be used to override behavior when the current node being walked is an error.
-        /// </summary>
-        /// <param name="node"> The python ast node being walked.</param>
-        /// <returns> boolean value. not important for our implementation. this is handeled by a call to the base class.</returns>
-        public override bool Walk(ErrorExpression node)
+        public override bool Walk(IronPython.Compiler.Ast.ForStatement node)
         {
+            if (node == null)
+            {
+                return false;
+            }
+            var forBlock = PythonEntityCreationHelper.createForBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(forBlock);
+            forBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = forBlock;
             return true;
         }
 
-        public override bool Walk(Parameter node)
+        public override void PostWalk(IronPython.Compiler.Ast.ForStatement node)
         {
-            return true;
+if(node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
         }
+
+        public override bool Walk(IronPython.Compiler.Ast.WhileStatement node)
+        {
+            if(node == null)
+            {
+                return false;
+            }
+            var whileBlock = PythonEntityCreationHelper.createWhileBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(whileBlock);
+            whileBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = whileBlock;
+            return true;
+
+        }
+
+        public override void PostWalk(IronPython.Compiler.Ast.WhileStatement node)
+        {
+            if(node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
+        }
+
 
         ///<summary>
         ///This method returns the populated CodeFile.
