@@ -122,9 +122,14 @@ namespace Microsoft.CodeTalk
 
         }
 
-        public EnvDTE.Expression RunExpressionInDebugger(string expression)
+        public string RunExpressionInDebugger(string expression)
         {
-            return dte.Debugger.GetExpression(expression);
+			var exprResult = dte.Debugger.GetExpression(expression);
+			if (exprResult.IsValidValue)
+			{
+				return exprResult.Value;
+			}
+			return string.Empty;
         }
 
         Talkpoint MatchTalkPoint(Breakpoint breakpoint)
@@ -140,6 +145,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -161,6 +167,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -182,6 +189,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -203,6 +211,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -217,7 +226,7 @@ namespace Microsoft.CodeTalk
             }
         }
 
-        public bool RemoveTalkpointIfExists()
+        public bool RemoveBreakpointIfExists()
         {
             var cursorPos = GetCurrentCursorPosition();
             var filePath = GetActiveDocumentPath();
@@ -254,6 +263,11 @@ namespace Microsoft.CodeTalk
                 }
             }
             return false;
+        }
+
+        public void RemoveIfTalkpointsExists(string filePath, CursorPos position)
+        {
+            mTalkPoints.RemoveAll(t => (t.filePath.Equals(filePath) && t.position.lineNumber == position.lineNumber));
         }
 
         public void RemoveBreakpoints(string filePath, CursorPos position)

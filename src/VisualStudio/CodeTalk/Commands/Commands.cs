@@ -22,14 +22,14 @@ namespace Microsoft.CodeTalk.Commands
 {
     public class GetFunctionsCommand : CommandBase
     {
-		ResourceManager rm;
+        ResourceManager rm;
 
         public GetFunctionsCommand(CommandKeyConfig keys) : base(keys) { }
-		
+        
         public override void Execute()
         {
-			rm = new ResourceManager(typeof(Resources));
-			System.Diagnostics.Debug.WriteLine("Get Functions");
+            rm = new ResourceManager(typeof(Resources));
+            System.Diagnostics.Debug.WriteLine("Get Functions");
 
             IEnumerable<ISyntaxEntity> functions = new List<ISyntaxEntity>();
             CodeFile codeFile;
@@ -47,8 +47,8 @@ namespace Microsoft.CodeTalk.Commands
             }
             catch (CodeTalkLanguageServiceException)
             {
-				MessageBox.Show(rm.GetString("CompilationErrorMessage", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show(rm.GetString("CompilationErrorMessage", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             //Creating a function collector for getting all the functions
@@ -60,8 +60,8 @@ namespace Microsoft.CodeTalk.Commands
 
             if (0 == functions.Count())
             {
-				MessageBox.Show(rm.GetString("NoFunctionsString", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
-				return;
+                MessageBox.Show(rm.GetString("NoFunctionsString", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
+                return;
             }
 
             ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(AccessibilityToolWindow), 0, true);
@@ -72,21 +72,21 @@ namespace Microsoft.CodeTalk.Commands
             }
 
             IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
-			windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("FunctionsListTitle", CultureInfo.CurrentCulture));
+            windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("FunctionsListTitle", CultureInfo.CurrentCulture));
 
-			Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
 
-			(listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(functions, rm.GetString("FunctionsListTitle", CultureInfo.CurrentCulture));
-		}
+            (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(functions, rm.GetString("FunctionsListTitle", CultureInfo.CurrentCulture));
+        }
 
         public override bool PassControl() => false;
     }
 
     public class GetContextCommand : CommandBase
     {
-		ResourceManager rm;
+        ResourceManager rm;
 
-		public GetContextCommand(CommandKeyConfig keys) : base(keys) {  }
+        public GetContextCommand(CommandKeyConfig keys) : base(keys) {  }
 
         public override bool PassControl()
         {
@@ -94,9 +94,9 @@ namespace Microsoft.CodeTalk.Commands
         }
         public override void Execute()
         {
-			rm = new ResourceManager(typeof(Resources));
+            rm = new ResourceManager(typeof(Resources));
 
-			CodeFile codeFile;
+            CodeFile codeFile;
             IList<ISyntaxEntity> contextHierarchy;
 
             //Getting the code text from the active document
@@ -112,8 +112,8 @@ namespace Microsoft.CodeTalk.Commands
             }
             catch (CodeTalkLanguageServiceException)
             {
-				MessageBox.Show(rm.GetString("CompilationErrorMessage", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show(rm.GetString("CompilationErrorMessage", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             try
             {
@@ -124,8 +124,8 @@ namespace Microsoft.CodeTalk.Commands
 
                 if (0 == contextHierarchy.Count)
                 {
-					MessageBox.Show(rm.GetString("NoContextString", CultureInfo.CurrentCulture) + " " + currentLineNumber.ToString(), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
-					return;
+                    MessageBox.Show(rm.GetString("NoContextString", CultureInfo.CurrentCulture) + " " + currentLineNumber.ToString(), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
+                    return;
                 }
 
                 var entities = contextHierarchy.Reverse().ToList().ConvertAll(x => (ISyntaxEntity)x);
@@ -134,16 +134,16 @@ namespace Microsoft.CodeTalk.Commands
 
                 if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
                 {
-					MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
+                    MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
                 }
 
                 IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
-				windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("GetContextTitle", CultureInfo.CurrentCulture));
+                windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("GetContextTitle", CultureInfo.CurrentCulture));
 
-				Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
 
-				(listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(entities, rm.GetString("GetContextTitle", CultureInfo.CurrentCulture), false);
-			}
+                (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(entities, rm.GetString("GetContextTitle", CultureInfo.CurrentCulture), false);
+            }
             catch (IndexOutOfRangeException)
             {
                 MessageBox.Show("The cursor does not seem to be in code. please move the cursor and try again.", "CodeTalk", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -165,14 +165,14 @@ namespace Microsoft.CodeTalk.Commands
 
     public class GetErrorsCommand : CommandBase
     {
-		ResourceManager rm;
+        ResourceManager rm;
 
-		public GetErrorsCommand(CommandKeyConfig keys) : base(keys) { }
+        public GetErrorsCommand(CommandKeyConfig keys) : base(keys) { }
 
         public override void Execute()
         {
-			rm = new ResourceManager(typeof(Resources));
-			System.Diagnostics.Debug.WriteLine("Get Errors");
+            rm = new ResourceManager(typeof(Resources));
+            System.Diagnostics.Debug.WriteLine("Get Errors");
 
             var errors = new List<ISyntaxEntity>();
 
@@ -190,8 +190,8 @@ namespace Microsoft.CodeTalk.Commands
             {
                 System.Threading.Tasks.Task.Run(() =>
                 {
-					MessageBox.Show(rm.GetString("NoErrorsString", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
-				});
+                    MessageBox.Show(rm.GetString("NoErrorsString", CultureInfo.CurrentCulture), rm.GetString("CodeTalkString", CultureInfo.CurrentCulture), MessageBoxButtons.OK);
+                });
                 return;
             }
 
@@ -199,17 +199,17 @@ namespace Microsoft.CodeTalk.Commands
 
             if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
             {
-				MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
-			}
-			else
-			{
-				IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
-				windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("ErrorListTitle", CultureInfo.CurrentCulture));
+                MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
+            }
+            else
+            {
+                IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
+                windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("ErrorListTitle", CultureInfo.CurrentCulture));
 
-				Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
 
-				(listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(errors, rm.GetString("ErrorListTitle", CultureInfo.CurrentCulture));
-			}
+                (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(errors, rm.GetString("ErrorListTitle", CultureInfo.CurrentCulture));
+            }
 
             
         }
@@ -219,14 +219,14 @@ namespace Microsoft.CodeTalk.Commands
 
     public class GetSummaryCommand : CommandBase
     {
-		ResourceManager rm;
+        ResourceManager rm;
 
-		public GetSummaryCommand(CommandKeyConfig keys) : base(keys) { }
+        public GetSummaryCommand(CommandKeyConfig keys) : base(keys) { }
 
         public override void Execute()
         {
-			rm = new ResourceManager(typeof(Resources));
-			System.Diagnostics.Debug.WriteLine("Get Summary");
+            rm = new ResourceManager(typeof(Resources));
+            System.Diagnostics.Debug.WriteLine("Get Summary");
 
             //Getting the code text from the active document
             var path = TalkCodePackage.vsOperations.GetActiveDocumentPath();
@@ -244,22 +244,22 @@ namespace Microsoft.CodeTalk.Commands
 
                 if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
                 {
-					MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
-				}
-				else
-				{
-					IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
-					windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("FileSummaryTitle", CultureInfo.CurrentCulture));
-					Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                    MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
+                    windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("FileSummaryTitle", CultureInfo.CurrentCulture));
+                    Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
 
-					(listFunctionsWindow as GetSummaryToolWindow).windowControl.SetTreeView(codeFile, rm.GetString("FileSSummaryTitle", CultureInfo.CurrentCulture));
-				}
+                    (listFunctionsWindow as GetSummaryToolWindow).windowControl.SetTreeView(codeFile, rm.GetString("FileSSummaryTitle", CultureInfo.CurrentCulture));
+                }
                 
             }
             catch (CodeTalkLanguageServiceException)
             {
-				MessageBox.Show(rm.GetString("FileProcessError", CultureInfo.CurrentCulture));
-			}
+                MessageBox.Show(rm.GetString("FileProcessError", CultureInfo.CurrentCulture));
+            }
         }
 
         public override bool PassControl() => false;
@@ -268,31 +268,30 @@ namespace Microsoft.CodeTalk.Commands
 
     public class CreateBreakpointCommand : CommandBase
     {
-		ResourceManager rm;
+        ResourceManager rm;
 
-		public CreateBreakpointCommand(CommandKeyConfig keys) : base(keys) { }
+        public CreateBreakpointCommand(CommandKeyConfig keys) : base(keys) { }
 
         public override void Execute()
         {
-			rm = new ResourceManager(typeof(Resources));
-			Debug.WriteLine("Create Breakpoint");
+            rm = new ResourceManager(typeof(Resources));
 
-            if (TalkCodePackage.vsOperations.RemoveTalkpointIfExists()) { return; }
+            if (TalkCodePackage.vsOperations.RemoveBreakpointIfExists()) { return; }
 
             ToolWindowPane talkpointWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(TalkpointToolWindow), 0, true);
 
             if ((null == talkpointWindow) || (null == talkpointWindow.Frame))
             {
-				MessageBox.Show("Cannote create breakpoint window", "Cannot create tool window", MessageBoxButtons.OK);
-			}
-			else
-			{
-				IVsWindowFrame twindowFrame = (IVsWindowFrame)talkpointWindow.Frame;
-				twindowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("TalkPointWindowTitle", CultureInfo.CurrentCulture));
+                MessageBox.Show("Cannote create breakpoint window", "Cannot create tool window", MessageBoxButtons.OK);
+            }
+            else
+            {
+                IVsWindowFrame twindowFrame = (IVsWindowFrame)talkpointWindow.Frame;
+                twindowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, rm.GetString("TalkPointWindowTitle", CultureInfo.CurrentCulture));
 
-				Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(twindowFrame.Show());
-				((talkpointWindow as TalkpointToolWindow).Content as TalkpointToolWindowControl).ClearAll();
-			}
+                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(twindowFrame.Show());
+                ((talkpointWindow as TalkpointToolWindow).Content as TalkpointToolWindowControl).ClearAll();
+            }
         }
 
         public override bool PassControl() => false;
