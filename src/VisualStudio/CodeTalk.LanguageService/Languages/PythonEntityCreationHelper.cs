@@ -69,5 +69,11 @@ namespace Microsoft.CodeTalk.LanguageService
             WhileBlock whileBlock = new WhileBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
             return whileBlock;
         }
+
+        internal static IfBlock createIfBlock(IfStatement node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            IfBlock ifBlock = new IfBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return ifBlock;
+        }
     }
 }

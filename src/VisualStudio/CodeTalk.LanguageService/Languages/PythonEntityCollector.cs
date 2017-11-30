@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//using IronPython.Compiler.Ast;
-using IronPython.Compiler.Ast;
 using System.Diagnostics;
+
+using IronPython.Compiler.Ast;
+
 
 namespace Microsoft.CodeTalk.LanguageService
 {
@@ -137,6 +137,30 @@ if(node == null)
         }
 
         public override void PostWalk(IronPython.Compiler.Ast.WhileStatement node)
+        {
+            if(node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
+        }
+
+        public override bool Walk(IronPython.Compiler.Ast.IfStatement node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            var ifBlock = PythonEntityCreationHelper.createIfBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(ifBlock);
+            ifBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = ifBlock;
+            return true;
+        }
+
+        public override void PostWalk(IronPython.Compiler.Ast.IfStatement node)
         {
             if(node == null)
             {
