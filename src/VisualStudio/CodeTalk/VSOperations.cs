@@ -144,9 +144,9 @@ namespace Microsoft.CodeTalk
             {
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
-				//Toggling Talkpoint
-				RemoveIfTalkpointsExists(filePath, cursorPos);
-				if (CheckIfBreakpointExists(filePath, cursorPos))
+                //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
+                if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
@@ -166,14 +166,14 @@ namespace Microsoft.CodeTalk
             {
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
-				//Toggling Talkpoint
-				RemoveIfTalkpointsExists(filePath, cursorPos);
-				if (CheckIfBreakpointExists(filePath, cursorPos))
+                //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
+                if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-				Talkpoint talkpoint = new ToneTalkpoint(filePath, cursorPos, doesContinue, customTone);
+                Talkpoint talkpoint = new ToneTalkpoint(filePath, cursorPos, doesContinue, customTone);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
@@ -188,14 +188,14 @@ namespace Microsoft.CodeTalk
             {
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
-				//Toggling Talkpoint
-				RemoveIfTalkpointsExists(filePath, cursorPos);
-				if (CheckIfBreakpointExists(filePath, cursorPos))
+                //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
+                if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
                 }
-				Talkpoint talkpoint = new TextTalkpoint(filePath, cursorPos, doesContinue, statement);
+                Talkpoint talkpoint = new TextTalkpoint(filePath, cursorPos, doesContinue, statement);
                 AddTalkPoint(talkpoint);
             }
             catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
@@ -210,9 +210,9 @@ namespace Microsoft.CodeTalk
             {
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
-				//Toggling Talkpoint
-				RemoveIfTalkpointsExists(filePath, cursorPos);
-				if (CheckIfBreakpointExists(filePath, cursorPos))
+                //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
+                if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
                     return;
@@ -265,18 +265,12 @@ namespace Microsoft.CodeTalk
             return false;
         }
 
-		public void RemoveIfTalkpointsExists(string filePath, CursorPos position)
-		{
-			foreach (var talkpoint in mTalkPoints)
-			{
-				if(talkpoint.filePath.Equals(filePath) && talkpoint.position.lineNumber == position.lineNumber)
-				{
-					mTalkPoints.Remove(talkpoint);
-				}
-			}
-		}
+        public void RemoveIfTalkpointsExists(string filePath, CursorPos position)
+        {
+            mTalkPoints.RemoveAll(t => (t.filePath.Equals(filePath) && t.position.lineNumber == position.lineNumber));
+        }
 
-		public void RemoveBreakpoints(string filePath, CursorPos position)
+        public void RemoveBreakpoints(string filePath, CursorPos position)
         {
 
             mTalkPoints.RemoveAll(b => (b.filePath.Equals(filePath) && b.position.lineNumber == position.lineNumber));
