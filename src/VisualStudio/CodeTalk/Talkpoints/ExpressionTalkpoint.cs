@@ -18,10 +18,10 @@ namespace Microsoft.CodeTalk.Talkpoints
         public override void Execute()
         {
             if (string.IsNullOrEmpty(expression)) { return; }
-            var exp = TalkCodePackage.vsOperations.RunExpressionInDebugger(expression);
-            if (exp.IsValidValue)
+            var expResult = TalkCodePackage.vsOperations.RunExpressionInDebugger(expression);
+            if (!string.IsNullOrEmpty(expResult))
             {
-                TextToSpeech.SpeakText(exp.Value);
+                TextToSpeech.SpeakText(expResult);
             }
         }
     }

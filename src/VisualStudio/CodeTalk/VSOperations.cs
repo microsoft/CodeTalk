@@ -122,9 +122,14 @@ namespace Microsoft.CodeTalk
 
         }
 
-        public EnvDTE.Expression RunExpressionInDebugger(string expression)
+        public string RunExpressionInDebugger(string expression)
         {
-            return dte.Debugger.GetExpression(expression);
+			var exprResult = dte.Debugger.GetExpression(expression);
+			if (exprResult.IsValidValue)
+			{
+				return exprResult.Value;
+			}
+			return string.Empty;
         }
 
         Talkpoint MatchTalkPoint(Breakpoint breakpoint)
