@@ -275,7 +275,6 @@ namespace Microsoft.CodeTalk.Commands
         public override void Execute()
         {
 			rm = new ResourceManager(typeof(Resources));
-			Debug.WriteLine("Create Breakpoint");
 
             if (TalkCodePackage.vsOperations.RemoveBreakpointIfExists()) { return; }
 

@@ -262,13 +262,7 @@ namespace Microsoft.CodeTalk
 
 		public void RemoveIfTalkpointsExists(string filePath, CursorPos position)
 		{
-			foreach (var talkpoint in mTalkPoints)
-			{
-				if(talkpoint.filePath.Equals(filePath) && talkpoint.position.lineNumber == position.lineNumber)
-				{
-					mTalkPoints.Remove(talkpoint);
-				}
-			}
+            mTalkPoints.RemoveAll(t => (t.filePath.Equals(filePath) && t.position.lineNumber == position.lineNumber));
 		}
 
 		public void RemoveBreakpoints(string filePath, CursorPos position)
