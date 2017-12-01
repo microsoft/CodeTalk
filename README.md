@@ -8,8 +8,10 @@ Code Talk is a step towards making programming IDEs more accessible. The plugin 
 
 CodeTalk is currently only available for Visual Studio running in Windows. We are working very hard towards bringing it to more platforms and IDEs. Stay tuned.
 
-# Getting Started  
-To install the latest version of the plugin, please visit the [releases page](https://github.com/Microsoft/CodeTalk/releases/tag/v0.8.0)  
+# Download CodeTalk
+Download the VISX installer [here](https://github.com/Microsoft/CodeTalk/releases/tag/v0.8.0)  
+
+# Getting Started with code  
 To know more about CodeTalk features, please visit the [Wiki](https://github.com/Microsoft/CodeTalk/wiki).  
 To know more about building and testing CodeTalk, please click [here](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
 
