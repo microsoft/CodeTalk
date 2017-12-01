@@ -26,7 +26,7 @@ using Microsoft.CodeTalk.Talkpoints;
 
 namespace Microsoft.CodeTalk
 {
-    public class VSOperations : IDisposable
+    public class VSOperations : IEnvironmentOperations, IDisposable
     {
         DTE dte;
         IVsTextManager textManager;
@@ -50,7 +50,13 @@ namespace Microsoft.CodeTalk
             textManager = (IVsTextManager)Package.GetGlobalService(typeof(SVsTextManager));
             debugEvents = dte.Events.DebuggerEvents;
             mTalkPoints = new List<Talkpoint>();
-        }
+
+			//Setting Handlers
+			SetBreakModeHandler();
+			SetExceptionHandler();
+			//VS Document focussed changed event
+			OnDocumentFocusChanged();
+		}
 
         public void SetBreakModeHandler()
         {
@@ -226,7 +232,7 @@ namespace Microsoft.CodeTalk
             }
         }
 
-        public bool RemoveBreakpointIfExists()
+        public bool RemoveBreakpointInCurrentPosition()
         {
             var cursorPos = GetCurrentCursorPosition();
             var filePath = GetActiveDocumentPath();
@@ -311,19 +317,21 @@ namespace Microsoft.CodeTalk
             return codeText;
         }
 
-        public void GoToLocationInActiveDocument(int lineNumber)
+        public void GoToLocationInActiveDocument(int lineNumber, int columnNumber = 0)
         {
             if (null == dte.ActiveDocument) { return; }
             TextDocument activeDocument = dte.ActiveDocument.Object() as TextDocument;
             dte.ActiveDocument.Activate();
             activeDocument.Selection.GotoLine(lineNumber);
         }
+
         public bool IsActiveDocumentPresent()
         {
             if (null == dte) { return false; }
             if (null == dte.ActiveDocument) { return false; }
             return true;
         }
+
         public int GetCursorLineNumber()
         {
             return GetCurrentCursorPosition().lineNumber;

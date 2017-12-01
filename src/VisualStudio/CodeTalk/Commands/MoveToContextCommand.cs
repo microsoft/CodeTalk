@@ -57,7 +57,7 @@ namespace Microsoft.CodeTalk.Commands
                 int currentLineNumber = 0;
                 int destinationLineNumber = 0;
 
-                currentLineNumber = TalkCodePackage.vsOperations.GetCursorLineNumber();
+                currentLineNumber = TalkCodePackage.vsOperations.GetCurrentCursorPosition().lineNumber;
                 contextHierarchy = codeFile.GetContextAtLine(currentLineNumber) as IList<ISyntaxEntity>;
 
                 if (0 == contextHierarchy.Count)

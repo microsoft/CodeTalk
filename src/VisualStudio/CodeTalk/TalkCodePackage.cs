@@ -174,12 +174,6 @@ namespace Microsoft.CodeTalk
             currentPackage = this;
             vsOperations = new VSOperations();
 
-            //Setting Handlers
-            vsOperations.SetBreakModeHandler();
-            vsOperations.SetExceptionHandler();
-            //VS Document focussed changed event
-            vsOperations.OnDocumentFocusChanged();
-
             TextToSpeech.IsTextToSpeechEnabled = true;
             AboutCommand.Initialize(this);
             CodeTalkOptionsCommand.Initialize(this);

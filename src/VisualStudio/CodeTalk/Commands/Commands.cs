@@ -119,7 +119,7 @@ namespace Microsoft.CodeTalk.Commands
             {
                 int currentLineNumber = 0;
 
-                currentLineNumber = TalkCodePackage.vsOperations.GetCursorLineNumber();
+                currentLineNumber = TalkCodePackage.vsOperations.GetCurrentCursorPosition().lineNumber;
                 contextHierarchy = codeFile.GetContextAtLine(currentLineNumber) as IList<ISyntaxEntity>;
 
                 if (0 == contextHierarchy.Count)
@@ -276,7 +276,7 @@ namespace Microsoft.CodeTalk.Commands
         {
             rm = new ResourceManager(typeof(Resources));
 
-            if (TalkCodePackage.vsOperations.RemoveBreakpointIfExists()) { return; }
+            if (TalkCodePackage.vsOperations.RemoveBreakpointInCurrentPosition()) { return; }
 
             ToolWindowPane talkpointWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(TalkpointToolWindow), 0, true);
 
