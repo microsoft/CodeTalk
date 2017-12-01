@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Microsoft/CodeTalk/blob/master/LICENSE)  
+  
 # CodeTalk
 Code Talk is a step towards making programming IDEs more accessible. The plugin currently concentrates on three main aspects of Programming:
 1. Glanceability
