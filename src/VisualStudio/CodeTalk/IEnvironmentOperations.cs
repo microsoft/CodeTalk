@@ -57,7 +57,7 @@ namespace Microsoft.CodeTalk
         string GetActiveDocumentPath();
 
         /// <summary>
-        /// Method to ge the code text of the actuve document
+        /// Method to get the code text of the actuve document
         /// </summary>
         /// <returns></returns>
         string GetActiveDocumentCode();
