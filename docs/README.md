@@ -12,6 +12,7 @@ CodeTalk is currently only available for Visual Studio running in Windows. We ar
 Download the VISX installer [here](https://github.com/Microsoft/CodeTalk/releases/tag/v0.8.0)  
 
 # Getting Started with code  
+Visit the repository [here](https://github.com/Microsoft/CodeTalk).  
 To know more about CodeTalk features, please visit the [Wiki](https://github.com/Microsoft/CodeTalk/wiki).  
 To know more about building and testing CodeTalk, please click [here](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
 
