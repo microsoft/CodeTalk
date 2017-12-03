@@ -121,7 +121,31 @@ if(node == null)
             base.PostWalk(node);
         }
 
-        public override bool Walk(IronPython.Compiler.Ast.WhileStatement node)
+        public override bool Walk(IronPython.Compiler.Ast.ComprehensionFor node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            var forBlock = PythonEntityCreationHelper.createComprehensionForBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(forBlock);
+            forBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = forBlock;
+            return true;
+        }
+
+        public override void PostWalk(IronPython.Compiler.Ast.ComprehensionFor node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
+        }
+
+                public override bool Walk(IronPython.Compiler.Ast.WhileStatement node)
         {
             if(node == null)
             {
@@ -170,7 +194,55 @@ if(node == null)
             base.PostWalk(node);
         }
 
+        public override bool Walk(IronPython.Compiler.Ast.ComprehensionIf node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            var ifBlock = PythonEntityCreationHelper.createComprehensionIfBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(ifBlock);
+            ifBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = ifBlock;
+            return true;
+        }
+        
+        public override void PostWalk(IronPython.Compiler.Ast.ComprehensionIf node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
+        }
 
+        public override bool Walk(IronPython.Compiler.Ast.TryStatement node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            var tryBlock = PythonEntityCreationHelper.createTryBlock(node, m_currentCodeFile, m_currentParent);
+            m_currentParent.AddChild(tryBlock);
+            tryBlock.Parent = m_currentParent;
+            m_savedParents.Push(m_currentParent);
+            m_currentParent = tryBlock;
+            return true;
+        }
+
+        public override void PostWalk(IronPython.Compiler.Ast.TryStatement node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            m_currentParent = m_savedParents.Pop();
+            base.PostWalk(node);
+        }
+
+        
         ///<summary>
         ///This method returns the populated CodeFile.
         /// </summary>

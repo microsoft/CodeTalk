@@ -25,10 +25,12 @@ class adder:
         while i in range(l):
             if self.list[i]%2 == 0:
                 sum = sum + self.list[i]
-
         return sum
 
+    def returnOdds(self):
+        return [odds for num in self.list if num%2 != 0]
 
+    
 #method that is not in any class:
 def outer_method():
     return "bla"
