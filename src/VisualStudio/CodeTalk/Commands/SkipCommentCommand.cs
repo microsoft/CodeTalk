@@ -54,7 +54,7 @@ namespace Microsoft.CodeTalk.Commands
 				MessageBox.Show(rm.GetString("CompilationErrorString", CultureInfo.CurrentCulture), rm.GetString("CodeTalkText", CultureInfo.CurrentCulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
             }
-            lineNumber = TalkCodePackage.vsOperations.GetCursorLineNumber();
+            lineNumber = TalkCodePackage.vsOperations.GetCurrentCursorPosition().lineNumber;
             commentAtLine = codeFile.GetCommentAtLine(lineNumber);
             if (commentAtLine != null)
             {

@@ -68,6 +68,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IEnvironmentOperations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,9 +140,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeTalk.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="index.html" />
     <Content Include="Resources\AboutCommand.png" />
-    <Content Include="Resources\CodeTalk.png" />
+    <Content Include="Resources\CodeTalk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\CodeTalkOptionsCommand.png" />
     <Content Include="UI\Resources\GetSummaryToolWindowCommand.png" />
     <Content Include="UI\Resources\TalkpointToolWindowCommand.png" />

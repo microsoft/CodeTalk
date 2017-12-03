@@ -26,7 +26,7 @@ using Microsoft.CodeTalk.Talkpoints;
 
 namespace Microsoft.CodeTalk
 {
-    public class VSOperations : IDisposable
+    public class VSOperations : IEnvironmentOperations, IDisposable
     {
         DTE dte;
         IVsTextManager textManager;
@@ -50,7 +50,13 @@ namespace Microsoft.CodeTalk
             textManager = (IVsTextManager)Package.GetGlobalService(typeof(SVsTextManager));
             debugEvents = dte.Events.DebuggerEvents;
             mTalkPoints = new List<Talkpoint>();
-        }
+
+			//Setting Handlers
+			SetBreakModeHandler();
+			SetExceptionHandler();
+			//VS Document focussed changed event
+			OnDocumentFocusChanged();
+		}
 
         public void SetBreakModeHandler()
         {
@@ -122,9 +128,14 @@ namespace Microsoft.CodeTalk
 
         }
 
-        public EnvDTE.Expression RunExpressionInDebugger(string expression)
+        public string RunExpressionInDebugger(string expression)
         {
-            return dte.Debugger.GetExpression(expression);
+			var exprResult = dte.Debugger.GetExpression(expression);
+			if (exprResult.IsValidValue)
+			{
+				return exprResult.Value;
+			}
+			return string.Empty;
         }
 
         Talkpoint MatchTalkPoint(Breakpoint breakpoint)
@@ -140,6 +151,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -161,6 +173,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -182,6 +195,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -203,6 +217,7 @@ namespace Microsoft.CodeTalk
                 var cursorPos = GetCurrentCursorPosition();
                 var filePath = GetActiveDocumentPath();
                 //Toggling Talkpoint
+                RemoveIfTalkpointsExists(filePath, cursorPos);
                 if (CheckIfBreakpointExists(filePath, cursorPos))
                 {
                     RemoveBreakpoints(filePath, cursorPos);
@@ -217,7 +232,7 @@ namespace Microsoft.CodeTalk
             }
         }
 
-        public bool RemoveTalkpointIfExists()
+        public bool RemoveBreakpointInCurrentPosition()
         {
             var cursorPos = GetCurrentCursorPosition();
             var filePath = GetActiveDocumentPath();
@@ -254,6 +269,11 @@ namespace Microsoft.CodeTalk
                 }
             }
             return false;
+        }
+
+        public void RemoveIfTalkpointsExists(string filePath, CursorPos position)
+        {
+            mTalkPoints.RemoveAll(t => (t.filePath.Equals(filePath) && t.position.lineNumber == position.lineNumber));
         }
 
         public void RemoveBreakpoints(string filePath, CursorPos position)
@@ -297,19 +317,21 @@ namespace Microsoft.CodeTalk
             return codeText;
         }
 
-        public void GoToLocationInActiveDocument(int lineNumber)
+        public void GoToLocationInActiveDocument(int lineNumber, int columnNumber = 0)
         {
             if (null == dte.ActiveDocument) { return; }
             TextDocument activeDocument = dte.ActiveDocument.Object() as TextDocument;
             dte.ActiveDocument.Activate();
             activeDocument.Selection.GotoLine(lineNumber);
         }
+
         public bool IsActiveDocumentPresent()
         {
             if (null == dte) { return false; }
             if (null == dte.ActiveDocument) { return false; }
             return true;
         }
+
         public int GetCursorLineNumber()
         {
             return GetCurrentCursorPosition().lineNumber;
