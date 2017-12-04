@@ -29,3 +29,8 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 
 For more details related to contributions click [here](https://github.com/Microsoft/CodeTalk/wiki/Contribution)
 
+## Major Contributors
+* [Venkatesh Potluri](https://venkateshpotluri.me) ([@venkateshpotluri](https://github.com/venkateshpotluri))
+* [Priyan Vaithilingam](https://priyan.info) ([@priyanmuthu](https://github.com/priyanmuthu))
+* [Suresh Parthasarathy](https://www.microsoft.com/en-us/research/people/supartha/) ([@suiyengar](https://github.com/suiyengar))
+* [Gopal Srinivasa](https://www.microsoft.com/en-us/research/people/gopalsr/) ([@gopalrs](https://github.com/gopalrs))
