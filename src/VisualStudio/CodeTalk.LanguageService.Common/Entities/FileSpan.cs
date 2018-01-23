@@ -12,6 +12,7 @@ namespace Microsoft.CodeTalk.LanguageService
 {
     public class FileSpan
     {
+        public static FileSpan Default = new FileSpan(0, 0, 0, 0);
         public FileSpan(FileLinePositionSpan span)
         {
             StartLineNumber = span.StartLinePosition.Line + 1;

@@ -60,7 +60,7 @@ namespace Microsoft.CodeTalk.UI
 			}
 			else
 			{
-				return "../res/default.png";
+				return String.Empty;
 			}
 
 		}

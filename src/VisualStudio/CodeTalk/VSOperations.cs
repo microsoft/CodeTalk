@@ -23,6 +23,10 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using static Microsoft.CodeTalk.Constants;
 using Microsoft.CodeTalk.Talkpoints;
+using Newtonsoft.Json.Linq;
+using Microsoft.VisualStudio.Shell.Interop;
+using System.Globalization;
+using System.ServiceModel;
 
 namespace Microsoft.CodeTalk
 {
@@ -411,6 +415,8 @@ namespace Microsoft.CodeTalk
             dte.Events.WindowEvents.WindowActivated += OnWindowActivated;
         }
 
+        private Dictionary<string, bool> displayed = new Dictionary<string, bool>();
+
         private void OnWindowActivated(EnvDTE.Window gotFocus, EnvDTE.Window lostFocus)
         {
             focussedWindow = gotFocus;
@@ -420,6 +426,31 @@ namespace Microsoft.CodeTalk
                 if (null != gotFocus.Document)
                 {
                     System.Diagnostics.Debug.WriteLine(gotFocus.Document.Name);
+                    if ( isImageFile(gotFocus.Document.Name))
+                    {
+                        if (!displayed.ContainsKey(gotFocus.Document.Name))
+                        {
+                            List<string> response = invokeDrawizService(gotFocus.Document.FullName);
+                            List<ISyntaxEntity> syntaxEntities = new List<ISyntaxEntity>();
+                            foreach (var text in response.Where(str => !string.IsNullOrEmpty(str)))
+                            {
+                                var listEntry = new Microsoft.CodeTalk.LanguageService.Entities.Drawiz.DrawizEntity(text, gotFocus.Document.Name);
+                                syntaxEntities.Add(listEntry);
+                            }
+
+                            ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(AccessibilityToolWindow), 0, true);
+
+                            if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
+                            {
+                                System.Windows.MessageBox.Show("Cannote create tool window", "Cannot create tool window");
+                            }
+
+                            IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
+                            windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, "Description");
+                            (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(syntaxEntities, "Description", false);
+                            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                        }
+                    }
                 }
             }
             if (null != lostFocus)
@@ -432,6 +463,55 @@ namespace Microsoft.CodeTalk
             }
 
         }
+
+        #region DRAWIZ HACKS
+        private static string[] s_imgExtensions = { ".jpg", ".png", ".jpeg", ".bmp", ".gif" };
+        private bool isImageFile(string fileName)
+        {
+            return s_imgExtensions.Contains(System.IO.Path.GetExtension(fileName).ToLower());
+        }
+        private List<string> invokeDrawizService(string filePath)
+        {
+            //return new List<string>() { "Adfldsfkasfdkasdfasfd", "Bfafkdsalfsaklkfas", "Cafdsalsdkfal;sdkfas" };
+            Drawiz.ImageParsingServiceClient client = null;
+            try
+            {
+                BasicHttpBinding binding = new BasicHttpBinding();
+                client = new Drawiz.ImageParsingServiceClient(binding, new EndpointAddress("http://t-pugupt-z230/drawiz/ImageParsingService.svc"));
+                List<byte> bytes = new List<byte>();
+                using (System.IO.FileStream stream = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    using (BinaryReader reader = new BinaryReader(stream))
+                    {
+                        byte[] chunk = null;
+                        while ((chunk = reader.ReadBytes(1024)) != null && chunk.Length > 0)
+                        {
+                            bytes.AddRange(chunk);
+                        }
+                    }
+                }
+                var response = client.ParseImageBytes(bytes.ToArray());
+
+                JObject jobj = JObject.Parse(response);
+                string responseStr = jobj["Drawiz"]["Content"].Value<string>();
+                return responseStr.Split(new char[] { '\r','\n' }).ToList();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Call to Drawiz failed!" + ex.ToString());
+                return new List<string>();
+            }
+            finally
+            {
+                if (client != null)
+                {
+                    client.Close();
+                }
+            }
+        }
+
+        #endregion
+
 
         public bool IsActiveDocumentFocussed()
         {

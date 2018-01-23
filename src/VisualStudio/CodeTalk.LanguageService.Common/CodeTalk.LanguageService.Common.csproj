@@ -127,6 +127,7 @@
     <Compile Include="Entities\CodeFile.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\CompileError.cs" />
+    <Compile Include="Entities\Drawiz\DrawizEntity.cs" />
     <Compile Include="Entities\FileSpan.cs" />
     <Compile Include="Entities\FormalParameter.cs" />
     <Compile Include="Entities\FunctionDefinition.cs" />

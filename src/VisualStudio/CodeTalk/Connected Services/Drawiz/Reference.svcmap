@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ac3a5441-4412-4a68-b0de-ec9a107f0601" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://t-pugupt-z230/Drawiz/ImageParsingService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ImageParsingService.disco" MetadataType="Disco" ID="c55b0bd6-fdbd-4f30-8463-3d38d84821a1" SourceId="1" SourceUrl="http://t-pugupt-z230/drawiz/ImageParsingService.svc?disco" />
+    <MetadataFile FileName="ImageParsingService.wsdl" MetadataType="Wsdl" ID="c16da8c6-ab69-40c7-b4f6-877d20cddf60" SourceId="1" SourceUrl="http://t-pugupt-z230/drawiz/ImageParsingService.svc?wsdl" />
+    <MetadataFile FileName="ImageParsingService.xsd" MetadataType="Schema" ID="fbb49d73-a9fc-4c34-9a58-97a6ad5cd2fd" SourceId="1" SourceUrl="http://t-pugupt-z230/drawiz/ImageParsingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ImageParsingService1.xsd" MetadataType="Schema" ID="6aa44913-8841-4987-b6d0-926c25c91d48" SourceId="1" SourceUrl="http://t-pugupt-z230/drawiz/ImageParsingService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ImageParsingService2.xsd" MetadataType="Schema" ID="2c656d6c-bf24-424c-8755-8bca510fa186" SourceId="1" SourceUrl="http://t-pugupt-z230/drawiz/ImageParsingService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

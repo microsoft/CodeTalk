@@ -35,7 +35,8 @@ namespace Microsoft.CodeTalk.LanguageService
         ForEach,
         While,
         Switch,
-        Case
+        Case, 
+        ImageDescription
     }
 
     [Flags]
