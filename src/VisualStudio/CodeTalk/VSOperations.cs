@@ -415,7 +415,7 @@ namespace Microsoft.CodeTalk
             dte.Events.WindowEvents.WindowActivated += OnWindowActivated;
         }
 
-        private Dictionary<string, bool> displayed = new Dictionary<string, bool>();
+        private Dictionary<string, DateTime> displayed = new Dictionary<string, DateTime>();
 
         private void OnWindowActivated(EnvDTE.Window gotFocus, EnvDTE.Window lostFocus)
         {
@@ -428,7 +428,7 @@ namespace Microsoft.CodeTalk
                     System.Diagnostics.Debug.WriteLine(gotFocus.Document.Name);
                     if ( isImageFile(gotFocus.Document.Name))
                     {
-                        if (!displayed.ContainsKey(gotFocus.Document.Name))
+                        if (!displayed.ContainsKey(gotFocus.Document.Name) || DateTime.Now.Subtract(displayed[gotFocus.Document.Name]).TotalSeconds >= 30)
                         {
                             List<string> response = invokeDrawizService(gotFocus.Document.FullName);
                             List<ISyntaxEntity> syntaxEntities = new List<ISyntaxEntity>();
@@ -449,6 +449,14 @@ namespace Microsoft.CodeTalk
                             windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, "Description");
                             (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(syntaxEntities, "Description", false);
                             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                            if (!displayed.ContainsKey(gotFocus.Document.Name))
+                            {
+                                displayed.Add(gotFocus.Document.Name, DateTime.Now);
+                            }
+                            else
+                            {
+                                displayed[gotFocus.Document.Name] = DateTime.Now;
+                            }
                         }
                     }
                 }
