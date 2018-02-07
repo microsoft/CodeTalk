@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Microsoft/CodeTalk/blob/master/LICENSE)  
+[![Join the chat at https://gitter.im/Microsoft/CodeTalk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Microsoft/CodeTalk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Microsoft/CodeTalk/blob/master/LICENSE)  
   
 # CodeTalk
 Code Talk is a step towards making programming IDEs more accessible. The plugin currently concentrates on three main aspects of Programming:
