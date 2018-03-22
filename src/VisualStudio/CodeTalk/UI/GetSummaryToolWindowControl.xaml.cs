@@ -22,9 +22,10 @@ namespace Microsoft.CodeTalk.UI
 	{
 		//Tree Items binded to the WPF
 		public ObservableCollection<MenuItemViewModel> TreeItems { get; }
-		MenuItemViewModel treeRootViewModel = null;
-
-		FunctionTypes functionTypesToDisplay = FunctionTypes.MemberFunction |
+        public ObservableCollection<MenuItemViewModelDrawiz> TreeItemsDrawiz { get; }
+        MenuItemViewModel treeRootViewModel = null;
+        MenuItemViewModelDrawiz treeRootViewModelDrawiz = null;
+        FunctionTypes functionTypesToDisplay = FunctionTypes.MemberFunction |
 												FunctionTypes.Constructor |
 												FunctionTypes.Destructor |
 												FunctionTypes.External |
@@ -87,6 +88,27 @@ namespace Microsoft.CodeTalk.UI
 			}
 		}
 
+        void BuildTreeViewModelDrawiz(ISyntaxEntity node , MenuItemViewModelDrawiz menuItemViewModelDrawiz)
+        {
+            MenuItemViewModelDrawiz item = new MenuItemViewModelDrawiz()
+            {
+                DisplayText = node.DisplayText(),
+                Children = new ObservableCollection<MenuItemViewModelDrawiz>(),
+                IsExpanded = (node is Block || node is FunctionDefinition) ? false : true,
+            };
+            if (null == menuItemViewModelDrawiz)
+                treeRootViewModelDrawiz = item;
+            else
+                menuItemViewModelDrawiz.Children.Add(item);
+            menuItemViewModelDrawiz = item;
+
+            if (null == node.Children)
+                return;
+
+            foreach (var child in node.Children)
+                BuildTreeViewModelDrawiz(child, menuItemViewModelDrawiz);
+        }
+
 		public void SetTreeView(ISyntaxEntity node, string label)
 		{
 			//Cleaning UI
@@ -97,7 +119,7 @@ namespace Microsoft.CodeTalk.UI
 			//Modifed by prvai
 			//buildTree(node, null);
 			BuildTreeViewModel(node, null);
-
+            // treeRootViewModel will have root of Menuitemviewmodel object after this call 
 			//modified by prvai
 			TreeItems.Add(treeRootViewModel);
 
@@ -112,8 +134,23 @@ namespace Microsoft.CodeTalk.UI
 			}
 
 		}
+        public void SetTreeViewDrawiz(ISyntaxEntity node, string label)
+        {
+            TreeItemsDrawiz.Clear();
 
-		public static void CloseFrame()
+            treeRootViewModelDrawiz = null;
+            BuildTreeViewModelDrawiz(node, null);
+
+            TreeItemsDrawiz.Add(treeRootViewModelDrawiz);
+            treeView.Focus();
+
+            if (treeView.HasItems)
+            {
+                var selectedItem = treeView.Items[0] as MenuItemViewModelDrawiz;
+                selectedItem.IsSelected = true;
+            }
+        }
+        public static void CloseFrame()
 		{
 			ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(GetSummaryToolWindow), 0, true);
 

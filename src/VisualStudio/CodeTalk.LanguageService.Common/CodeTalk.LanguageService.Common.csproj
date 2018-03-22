@@ -124,6 +124,7 @@
     <Compile Include="Entities\Blocks\IfBlock.cs" />
     <Compile Include="Entities\Blocks\TryBlock.cs" />
     <Compile Include="Entities\Blocks\WhileBlock.cs" />
+    <Compile Include="Entities\TextTreeNode.cs" />
     <Compile Include="Entities\CodeFile.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\CompileError.cs" />

@@ -114,7 +114,75 @@ namespace Microsoft.CodeTalk
             return SpokenText; // + " at line " + LineNumber.ToString();
         }
     }
+    public class MenuItemViewModelDrawiz : System.ComponentModel.INotifyPropertyChanged
+    {
+        public MenuItemViewModelDrawiz()
+        {
+        }
+        public string DisplayText { get; set; } // the actual entry txt within the tree view
 
+        private ObservableCollection<MenuItemViewModelDrawiz> _children;
+
+        public ObservableCollection<MenuItemViewModelDrawiz> Children
+        {
+            get { return _children ?? (_children = new ObservableCollection <MenuItemViewModelDrawiz>()); }
+            set
+            {
+                _children = value;
+                OnPropertyChanged("Children");
+            }
+        }
+
+
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
+        private bool _isExpanded;
+        public bool IsExpanded
+        {
+            get
+            {
+                return _isExpanded;
+            }
+            set
+            {
+                _isExpanded = value;
+                OnPropertyChanged("IsExpanded");
+            }
+        }
+
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(name));
+        }
+
+        public MenuItemViewModelDrawiz(string displayText)
+        {
+            this.DisplayText = displayText;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void AddChild(MenuItemViewModelDrawiz child)
+        {
+            Children.Add(child);
+        }
+        public override string ToString()
+        {
+            return this.DisplayText;
+        }
+    }
     /// <summary>
     /// Interaction logic for AccessibilityToolbarWindowControl.
     /// </summary>

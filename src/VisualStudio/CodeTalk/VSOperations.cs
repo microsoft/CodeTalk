@@ -416,7 +416,7 @@ namespace Microsoft.CodeTalk
         }
 
         private Dictionary<string, DateTime> displayed = new Dictionary<string, DateTime>();
-
+ 
         private void OnWindowActivated(EnvDTE.Window gotFocus, EnvDTE.Window lostFocus)
         {
             focussedWindow = gotFocus;
@@ -430,13 +430,16 @@ namespace Microsoft.CodeTalk
                     {
                         if (!displayed.ContainsKey(gotFocus.Document.Name) || DateTime.Now.Subtract(displayed[gotFocus.Document.Name]).TotalSeconds >= 30)
                         {
-                            List<string> response = invokeDrawizService(gotFocus.Document.FullName);
+                            List <TextTreeNode> textTreeNodes = invokeDrawizService(gotFocus.Document.FullName);
+                            createDrawizTree createDrawizTreeInstance = new createDrawizTree();
+                            DrawizNode drawizRoot = createDrawizTreeInstance.createDrawizTextTree(0,textTreeNodes);
+                            //string response = "";
                             List<ISyntaxEntity> syntaxEntities = new List<ISyntaxEntity>();
-                            foreach (var text in response.Where(str => !string.IsNullOrEmpty(str)))
+                           /* foreach (var text in response.Where(str => !string.IsNullOrEmpty(str)))
                             {
                                 var listEntry = new Microsoft.CodeTalk.LanguageService.Entities.Drawiz.DrawizEntity(text, gotFocus.Document.Name);
                                 syntaxEntities.Add(listEntry);
-                            }
+                            }*/
 
                             ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(AccessibilityToolWindow), 0, true);
 
@@ -478,7 +481,7 @@ namespace Microsoft.CodeTalk
         {
             return s_imgExtensions.Contains(System.IO.Path.GetExtension(fileName).ToLower());
         }
-        private List<string> invokeDrawizService(string filePath)
+        private List <TextTreeNode> invokeDrawizService(string filePath)
         {
             //return new List<string>() { "Adfldsfkasfdkasdfasfd", "Bfafkdsalfsaklkfas", "Cafdsalsdkfal;sdkfas" };
             Drawiz.ImageParsingServiceClient client = null;
@@ -500,14 +503,18 @@ namespace Microsoft.CodeTalk
                 }
                 var response = client.ParseImageBytes(bytes.ToArray());
 
+
                 JObject jobj = JObject.Parse(response);
-                string responseStr = jobj["Drawiz"]["Content"].Value<string>();
-                return responseStr.Split(new char[] { '\r','\n' }).ToList();
+                string responseStr = jobj["Drawiz"]["Tree"].Value<string>();
+                List < TextTreeNode > textTreeNodes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TextTreeNode>>(responseStr);
+                return textTreeNodes;
+                //string responseStr = jobj["Drawiz"]["Content"].Value<string>();
+                //return responseStr.Split(new char[] { '\r','\n' }).ToList();
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("Call to Drawiz failed!" + ex.ToString());
-                return new List<string>();
+                return new List<TextTreeNode>();
             }
             finally
             {
