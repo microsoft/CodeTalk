@@ -22,9 +22,7 @@ namespace Microsoft.CodeTalk.UI
 	{
 		//Tree Items binded to the WPF
 		public ObservableCollection<MenuItemViewModel> TreeItems { get; }
-        public ObservableCollection<MenuItemViewModelDrawiz> TreeItemsDrawiz { get; }
         MenuItemViewModel treeRootViewModel = null;
-        MenuItemViewModelDrawiz treeRootViewModelDrawiz = null;
         FunctionTypes functionTypesToDisplay = FunctionTypes.MemberFunction |
 												FunctionTypes.Constructor |
 												FunctionTypes.Destructor |
@@ -87,28 +85,6 @@ namespace Microsoft.CodeTalk.UI
 				BuildTreeViewModel(child, menuItemViewModel);
 			}
 		}
-
-        void BuildTreeViewModelDrawiz(ISyntaxEntity node , MenuItemViewModelDrawiz menuItemViewModelDrawiz)
-        {
-            MenuItemViewModelDrawiz item = new MenuItemViewModelDrawiz()
-            {
-                DisplayText = node.DisplayText(),
-                Children = new ObservableCollection<MenuItemViewModelDrawiz>(),
-                IsExpanded = (node is Block || node is FunctionDefinition) ? false : true,
-            };
-            if (null == menuItemViewModelDrawiz)
-                treeRootViewModelDrawiz = item;
-            else
-                menuItemViewModelDrawiz.Children.Add(item);
-            menuItemViewModelDrawiz = item;
-
-            if (null == node.Children)
-                return;
-
-            foreach (var child in node.Children)
-                BuildTreeViewModelDrawiz(child, menuItemViewModelDrawiz);
-        }
-
 		public void SetTreeView(ISyntaxEntity node, string label)
 		{
 			//Cleaning UI
@@ -134,22 +110,6 @@ namespace Microsoft.CodeTalk.UI
 			}
 
 		}
-        public void SetTreeViewDrawiz(ISyntaxEntity node, string label)
-        {
-            TreeItemsDrawiz.Clear();
-
-            treeRootViewModelDrawiz = null;
-            BuildTreeViewModelDrawiz(node, null);
-
-            TreeItemsDrawiz.Add(treeRootViewModelDrawiz);
-            treeView.Focus();
-
-            if (treeView.HasItems)
-            {
-                var selectedItem = treeView.Items[0] as MenuItemViewModelDrawiz;
-                selectedItem.IsSelected = true;
-            }
-        }
         public static void CloseFrame()
 		{
 			ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(GetSummaryToolWindow), 0, true);
