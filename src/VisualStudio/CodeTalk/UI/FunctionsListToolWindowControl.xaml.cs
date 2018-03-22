@@ -412,6 +412,11 @@ namespace Microsoft.CodeTalk
         ///</summary>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            //if (e.OriginalSource is TreeViewItem)
+            //{
+            //    var treeViewItem = e.OriginalSource;
+            //}
+
             if (e.Key == Key.Enter)
             {
                 GoToEntity();

@@ -326,6 +326,7 @@ namespace Microsoft.CodeTalk
             if (null == dte.ActiveDocument) { return; }
             TextDocument activeDocument = dte.ActiveDocument.Object() as TextDocument;
             dte.ActiveDocument.Activate();
+            if(null == activeDocument) { return; }
             activeDocument.Selection.GotoLine(lineNumber);
         }
 
@@ -430,28 +431,52 @@ namespace Microsoft.CodeTalk
                     {
                         if (!displayed.ContainsKey(gotFocus.Document.Name) || DateTime.Now.Subtract(displayed[gotFocus.Document.Name]).TotalSeconds >= 30)
                         {
-                            List <TextTreeNode> textTreeNodes = invokeDrawizService(gotFocus.Document.FullName);
-                            createDrawizTree createDrawizTreeInstance = new createDrawizTree();
-                            DrawizNode drawizRoot = createDrawizTreeInstance.createDrawizTextTree(0,textTreeNodes);
-                            //string response = "";
-                            List<ISyntaxEntity> syntaxEntities = new List<ISyntaxEntity>();
-                           /* foreach (var text in response.Where(str => !string.IsNullOrEmpty(str)))
-                            {
-                                var listEntry = new Microsoft.CodeTalk.LanguageService.Entities.Drawiz.DrawizEntity(text, gotFocus.Document.Name);
-                                syntaxEntities.Add(listEntry);
-                            }*/
+                            var drawizRoot = invokeDrawizService(gotFocus.Document.FullName);
 
+                            /* Drawiz Tree View*/
                             ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(AccessibilityToolWindow), 0, true);
 
                             if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
                             {
-                                System.Windows.MessageBox.Show("Cannote create tool window", "Cannot create tool window");
+                                System.Windows.Forms.MessageBox.Show("Cannote create tool window", "Cannot create tool window", MessageBoxButtons.OK);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
+                                    windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, "Drawiz: Diagram Explanation");
+                                    Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+
+                                    (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetTreeView(drawizRoot, "Image Description");
+                                }
+                                catch (Exception)
+                                {
+
+                                }
                             }
 
-                            IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
-                            windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, "Description");
-                            (listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(syntaxEntities, "Description", false);
-                            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+
+                            //string response = "";
+                            List<ISyntaxEntity> syntaxEntities = new List<ISyntaxEntity>();
+                            /* foreach (var text in response.Where(str => !string.IsNullOrEmpty(str)))
+                             {
+                                 var listEntry = new Microsoft.CodeTalk.LanguageService.Entities.Drawiz.DrawizEntity(text, gotFocus.Document.Name);
+                                 syntaxEntities.Add(listEntry);
+                             }*/
+
+                            //ToolWindowPane listFunctionsWindow = TalkCodePackage.currentPackage.FindToolWindow(typeof(AccessibilityToolWindow), 0, true);
+
+                            //if ((null == listFunctionsWindow) || (null == listFunctionsWindow.Frame))
+                            //{
+                            //    System.Windows.MessageBox.Show("Cannote create tool window", "Cannot create tool window");
+                            //}
+
+                            //IVsWindowFrame windowFrame = (IVsWindowFrame)listFunctionsWindow.Frame;
+                            //windowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_Caption, "Description");
+                            //(listFunctionsWindow as AccessibilityToolWindow).windowControl.SetListView(syntaxEntities, "Description", false);
+                            //Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+
                             if (!displayed.ContainsKey(gotFocus.Document.Name))
                             {
                                 displayed.Add(gotFocus.Document.Name, DateTime.Now);
@@ -481,7 +506,7 @@ namespace Microsoft.CodeTalk
         {
             return s_imgExtensions.Contains(System.IO.Path.GetExtension(fileName).ToLower());
         }
-        private List <TextTreeNode> invokeDrawizService(string filePath)
+        private DrawizNode invokeDrawizService(string filePath)
         {
             //return new List<string>() { "Adfldsfkasfdkasdfasfd", "Bfafkdsalfsaklkfas", "Cafdsalsdkfal;sdkfas" };
             Drawiz.ImageParsingServiceClient client = null;
@@ -506,15 +531,16 @@ namespace Microsoft.CodeTalk
 
                 JObject jobj = JObject.Parse(response);
                 string responseStr = jobj["Drawiz"]["Tree"].Value<string>();
-                List < TextTreeNode > textTreeNodes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TextTreeNode>>(responseStr);
-                return textTreeNodes;
+                List<TextTreeNode> textTreeNodes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TextTreeNode>>(responseStr);
+                DrawizNode drawizRoot = DrawizNode.createDrawizTextTree(0, textTreeNodes);
+                return drawizRoot;
                 //string responseStr = jobj["Drawiz"]["Content"].Value<string>();
                 //return responseStr.Split(new char[] { '\r','\n' }).ToList();
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("Call to Drawiz failed!" + ex.ToString());
-                return new List<TextTreeNode>();
+                return new DrawizNode();
             }
             finally
             {
