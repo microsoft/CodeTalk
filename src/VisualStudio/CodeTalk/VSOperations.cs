@@ -527,15 +527,34 @@ namespace Microsoft.CodeTalk
                     }
                 }
                 var response = client.ParseImageBytes(bytes.ToArray());
-
-
+                int flowChart = response.IndexOf(@"flow chart");
                 JObject jobj = JObject.Parse(response);
-                string responseStr = jobj["Drawiz"]["Tree"].Value<string>();
-                List<TextTreeNode> textTreeNodes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TextTreeNode>>(responseStr);
+                List<TextTreeNode> textTreeNodes = new List<TextTreeNode>();
+                if (flowChart != -1)
+                {
+                    string responseStr = jobj["Drawiz"]["Tree"].Value<string>();
+                    textTreeNodes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TextTreeNode>>(responseStr);
+                }
+                else // piechart
+                {
+                    int index = 0;
+                    string responseStr = jobj["Drawiz"]["Content"].Value<string>();
+                    List <string> responseList = responseStr.Split(new char[] { '\r','\n' }).ToList();
+                    foreach (string text in responseList)
+                    {
+                        if (!string.IsNullOrEmpty(text))
+                        {
+                            textTreeNodes.Add(new TextTreeNode(index, text, new List<int>()));
+                            if (index != 0) // make it a child of first
+                            {
+                                textTreeNodes[0].Children.Add(index);
+                            }
+                            index++;
+                        }
+                    }
+                }
                 DrawizNode drawizRoot = DrawizNode.createDrawizTextTree(0, textTreeNodes);
                 return drawizRoot;
-                //string responseStr = jobj["Drawiz"]["Content"].Value<string>();
-                //return responseStr.Split(new char[] { '\r','\n' }).ToList();
             }
             catch (Exception ex)
             {
