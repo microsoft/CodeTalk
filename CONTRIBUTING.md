@@ -9,4 +9,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
 or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-For more details related to contributions click [here](https://github.com/Microsoft/CodeTalk/wiki/Contribution)
+More details related to contributions can be found on our [wiki](https://github.com/Microsoft/CodeTalk/wiki/Contribution)
