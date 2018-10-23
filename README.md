@@ -16,7 +16,7 @@ To view all the releases, please visit the [release page](https://github.com/Mic
 
 # Getting Started  
 To know more about CodeTalk features, please visit the [Wiki](https://github.com/Microsoft/CodeTalk/wiki).  
-To know more about building and testing, please vist [CodeTalk](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
+To know more about building and testing, please visit [CodeTalk](https://github.com/Microsoft/CodeTalk/wiki/Building-and-Testing).
 
 # Contributing
 
