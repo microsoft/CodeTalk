@@ -6,7 +6,7 @@ Code Talk is a step towards making programming IDEs more accessible. The plugin 
 2. Real-Time Error information 
 3. Accessible Debugging
 
-CodeTalk is currently only available for Visual Studio running in Windows. We are working very hard towards bringing it to more platforms and IDEs. Stay tuned.
+CodeTalk is currently only available for Visual Studio running in Windows for C# and Python languages. We are working very hard towards bringing it to more platforms and IDEs. Stay tuned.
 
 [Video Demo of CodeTalk.](http://www.youtube.com/watch?v=ttkNYaPwn6E)
 
