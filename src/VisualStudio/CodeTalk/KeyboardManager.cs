@@ -4,14 +4,12 @@
 //------------------------------------------------------------------------------
 
 using Microsoft.CodeTalk.Commands;
+using Microsoft.CodeTalk.Profilepoints;
 using Microsoft.CodeTalk.UI;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,10 +17,10 @@ using System.Windows.Input;
 
 namespace Microsoft.CodeTalk
 {
-	/// <summary>
-	/// Class for managing the Keyboard events
-	/// </summary>
-	class KeyboardManager : IDisposable
+    /// <summary>
+    /// Class for managing the Keyboard events
+    /// </summary>
+    class KeyboardManager : IDisposable
 	{
 
 		public static bool IsWindowInFocus;
@@ -41,6 +39,8 @@ namespace Microsoft.CodeTalk
 
 		private static System.Threading.Timer ErrorDetectTimer;
 
+        static FunctionLevelDetailsHandler breakpointHandler;
+
 
 		/// <summary>
 		/// Add low level Keyboard Hook
@@ -50,6 +50,11 @@ namespace Microsoft.CodeTalk
 			UnHook();
 			_hookID = SetHook(_proc);
 		}
+
+        public void AddBreakpointHandler(FunctionLevelDetailsHandler TalkCodePackageBreakpointHandler)
+        {
+            breakpointHandler = TalkCodePackageBreakpointHandler;
+        }
 
 
 		/// <summary>

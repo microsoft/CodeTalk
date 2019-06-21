@@ -13,7 +13,6 @@ namespace Microsoft.CodeTalk
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Forms;
     using static Microsoft.CodeTalk.Commands.CommandConstants;
 
@@ -99,6 +98,12 @@ namespace Microsoft.CodeTalk
             SetCommandCombobox(ref CreateBreakpointKeyCombobox, ref CreateBreakpointModifierKeyCombobox,
                 TalkCodePackage.currentCodeTalkConfig.CreateBreakpointCommandKeyConfig.CommandKey,
                 TalkCodePackage.currentCodeTalkConfig.CreateBreakpointCommandKeyConfig.CommandModifierKey);
+
+
+            //Set Profilepoints
+            SetCommandCombobox(ref SetProfilepointsKeyCombobox, ref SetProfilepointsModifierKeyCombobox,
+                TalkCodePackage.currentCodeTalkConfig.SetProfilepointsCommandKeyConfig.CommandKey,
+                TalkCodePackage.currentCodeTalkConfig.SetProfilepointsCommandKeyConfig.CommandModifierKey);
         }
 
         public void SetCommandCombobox(ref System.Windows.Controls.ComboBox commandKeyCombobox, 
@@ -166,6 +171,9 @@ namespace Microsoft.CodeTalk
 
             config.CreateBreakpointCommandKeyConfig = new CommandKeyConfig(CreateBreakpointKeyCombobox.SelectedItem.ToString(),
                 CreateBreakpointModifierKeyCombobox.SelectedItem.ToString());
+
+            config.SetProfilepointsCommandKeyConfig = new CommandKeyConfig(SetProfilepointsKeyCombobox.SelectedItem.ToString(),
+                SetProfilepointsModifierKeyCombobox.SelectedItem.ToString());
         }
 
         public static void CloseFrame()

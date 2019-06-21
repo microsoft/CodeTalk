@@ -5,24 +5,17 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
 using System.Windows.Automation;
 using EnvDTE;
 using EnvDTE80;
 using System.IO;
-using System.Xml.Serialization;
 using System.Windows.Forms;
-using System.Runtime.Serialization;
 using Microsoft.CodeTalk.Commands;
+using Microsoft.CodeTalk.Profilepoints;
 
 namespace Microsoft.CodeTalk
 {
@@ -66,6 +59,17 @@ namespace Microsoft.CodeTalk
         /// Keyboard manager for executing commands.
         /// </summary>
         internal static KeyboardManager keyboardManager;
+
+        /// <summary>
+        /// WebSocket Server for setting up data flow channels with Visual Studio and Web Views.
+        /// </summary>
+        /// 
+        public CodeTalkWebSocketServer codeTalkWebSocketServer;
+
+        ///summary>
+        /// Breakpoint Handler for Profile Points
+        /// </summary>
+        static FunctionLevelDetailsHandler TalkCodePackageBreakpointHandler;
 
         /// <summary>
         /// Current process Id. Used for focus monitoring.
@@ -162,6 +166,7 @@ namespace Microsoft.CodeTalk
             keyboardManager = new KeyboardManager();
             keyboardManager.AddKeyboardHook();
 
+
             //Visual Studio close event
             m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
             ShutdownHandler = new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutdown);
@@ -172,8 +177,15 @@ namespace Microsoft.CodeTalk
             CodeTalk.UI.TalkpointToolWindowCommand.Initialize(this);
 
             currentPackage = this;
+
             vsOperations = new VSOperations();
 
+            codeTalkWebSocketServer = new CodeTalkWebSocketServer();
+
+            TalkCodePackageBreakpointHandler = new FunctionLevelDetailsHandler(codeTalkWebSocketServer);
+            vsOperations.SetBreakpointHandler(TalkCodePackageBreakpointHandler);
+
+            SetProfilepointsCommand.vsOperations = vsOperations;
             TextToSpeech.IsTextToSpeechEnabled = true;
             AboutCommand.Initialize(this);
             CodeTalkOptionsCommand.Initialize(this);

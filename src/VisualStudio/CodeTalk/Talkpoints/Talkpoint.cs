@@ -3,14 +3,6 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using EnvDTE;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.CodeTalk.Constants;
-
 namespace Microsoft.CodeTalk
 {
     public class CursorPos

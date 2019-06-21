@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using System;
 
 namespace Microsoft.CodeTalk.LanguageService
 {

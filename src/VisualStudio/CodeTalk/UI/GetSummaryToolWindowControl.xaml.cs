@@ -5,20 +5,18 @@
 
 namespace Microsoft.CodeTalk.UI
 {
-	using Microsoft.CodeTalk.LanguageService;
-	using Microsoft.VisualStudio.Shell;
-	using Microsoft.VisualStudio.Shell.Interop;
-	using System.Collections.ObjectModel;
-	using System.Diagnostics.CodeAnalysis;
-	using System.Linq;
-	using System.Windows;
-	using System.Windows.Controls;
-	using System.Windows.Input;
+    using Microsoft.CodeTalk.LanguageService;
+    using Microsoft.VisualStudio.Shell;
+    using Microsoft.VisualStudio.Shell.Interop;
+    using System.Collections.ObjectModel;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
-	/// <summary>
-	/// Interaction logic for GetSummaryToolWindowControl.
-	/// </summary>
-	public partial class GetSummaryToolWindowControl : UserControl
+    /// <summary>
+    /// Interaction logic for GetSummaryToolWindowControl.
+    /// </summary>
+    public partial class GetSummaryToolWindowControl : UserControl
 	{
 		//Tree Items binded to the WPF
 		public ObservableCollection<MenuItemViewModel> TreeItems { get; }

@@ -8,28 +8,24 @@ namespace Microsoft.CodeTalk
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using System.Windows.Automation;
-    using System.Diagnostics.CodeAnalysis;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using EnvDTE80;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
     using Microsoft.CodeTalk.LanguageService;
     using System.Collections.ObjectModel;
     using System;
     using System.ComponentModel;
-	using Microsoft.CodeTalk.UI;
+    using Microsoft.CodeTalk.UI;
 
 
-	// <summary>
-	/// <summary>
-	/// class containing data to populate the GUI
-	/// GUI can be a ListView or TreeView
-	/// </summary>
-	/// </summary>
-	public class MenuItemViewModel : System.ComponentModel.INotifyPropertyChanged
+    // <summary>
+    /// <summary>
+    /// class containing data to populate the GUI
+    /// GUI can be a ListView or TreeView
+    /// </summary>
+    /// </summary>
+    public class MenuItemViewModel : System.ComponentModel.INotifyPropertyChanged
     {
         public MenuItemViewModel()
         {

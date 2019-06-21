@@ -3,14 +3,8 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using Microsoft.CodeTalk.Properties;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk
 {
@@ -23,6 +17,12 @@ namespace Microsoft.CodeTalk
         public static int ErrorDetectWaitTimeMilliseconds = 2000;
 
         public static bool AutomaticErrorDetectEnabled = true;
+
+        public static string RequestFunctionDetails = "RequestFunctionDetails";
+
+        public static string Pause = "Pause";
+
+        public static string Resume = "Resume";
 
         public enum Tones
         {

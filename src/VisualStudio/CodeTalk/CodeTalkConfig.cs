@@ -8,17 +8,13 @@ using Microsoft.CodeTalk.Commands;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static Microsoft.CodeTalk.Commands.CommandConstants;
 
 namespace Microsoft.CodeTalk
 {
-	public class CodeTalkConfig
+    public class CodeTalkConfig
 	{
 		[XmlElement(ElementName = "CodeTalkKey")]
 		public string CodeTalkKeyString { get; set; }
@@ -46,9 +42,12 @@ namespace Microsoft.CodeTalk
 		[XmlElement(ElementName = "CreateBreakPointCommand")]
 		public CommandKeyConfig CreateBreakpointCommandKeyConfig { get; set; }
 
-		// XML Exclusions
+        [XmlElement(ElementName = "SetProfilepointsCommand")]
+        public CommandKeyConfig SetProfilepointsCommandKeyConfig { get; set; }
 
-		[XmlIgnore]
+        // XML Exclusions
+
+        [XmlIgnore]
 		public Keys CodeTalkKey { get; set; }
 
 		List<CommandBase> Commands
@@ -63,8 +62,9 @@ namespace Microsoft.CodeTalk
 					new SkipCommentCommand(SkipCommentCommandKeyConfig),
 					new GetContextCommand(GetContextCommandKeyConfig),
 					new MoveToContextCommand(MoveToContextCommandKeyConfig),
-					new CreateBreakpointCommand(CreateBreakpointCommandKeyConfig)
-				};
+					new CreateBreakpointCommand(CreateBreakpointCommandKeyConfig),
+                    new SetProfilepointsCommand(SetProfilepointsCommandKeyConfig)
+                };
 			}
 		}
 
@@ -96,8 +96,10 @@ namespace Microsoft.CodeTalk
 			GetContextCommandKeyConfig.ProcessAndValidate("Get Context");
 			MoveToContextCommandKeyConfig.ProcessAndValidate("Move To Context");
 			CreateBreakpointCommandKeyConfig.ProcessAndValidate("Create Breakpoint");
+            SetProfilepointsCommandKeyConfig.ProcessAndValidate("Set Profilepoints");
 
-		}
+
+        }
 
 		public void PrepareWrite()
 		{
@@ -126,7 +128,9 @@ namespace Microsoft.CodeTalk
 			GetContextCommandKeyConfig.PrepareWrite("Get Context");
 			MoveToContextCommandKeyConfig.PrepareWrite("Move To Context");
 			CreateBreakpointCommandKeyConfig.PrepareWrite("Create Breakpoint");
-		}
+            SetProfilepointsCommandKeyConfig.PrepareWrite("Set Profilepoints");
+
+        }
 
 		public List<CommandBase> GetCommands()
 		{

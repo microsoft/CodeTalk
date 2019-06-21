@@ -6,13 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CodeTalk.LanguageService;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using System.Diagnostics;
 using Microsoft.CodeTalk.UI;
 using System.Resources;
 using Microsoft.CodeTalk.Properties;
@@ -292,6 +289,20 @@ namespace Microsoft.CodeTalk.Commands
                 Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(twindowFrame.Show());
                 ((talkpointWindow as TalkpointToolWindow).Content as TalkpointToolWindowControl).ClearAll();
             }
+        }
+
+        public override bool PassControl() => false;
+    }
+
+    public class SetProfilepointsCommand : CommandBase
+    {
+        ResourceManager rm;
+        public static VSOperations vsOperations { get; set; }
+        public SetProfilepointsCommand(CommandKeyConfig keys) : base(keys) { }
+
+        public override void Execute()
+        {
+            vsOperations.AddAllProfilepoints();
         }
 
         public override bool PassControl() => false;

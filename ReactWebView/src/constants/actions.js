@@ -1,0 +1,33 @@
+export const TOGGLE_TABS = 'TOGGLE_TABS';
+
+export const UPDATE_CHARTS = 'UPDATE_CHARTS';
+
+export const LOAD_FUNCTION_LIST = 'LOAD_FUNCTION_LIST';
+
+export const SEND_MEMORY_USAGE = 'SEND_MEMORY_USAGE';
+
+export const SEND_CPU_USAGE = 'SEND_CPU_USAGE';
+
+export const SEND_FUNCTIONS = 'SEND_FUNCTIONS';
+
+export const SEND_TIMESLICE = 'SEND_TIMESLICE';
+
+export const SET_CPU_ALERTS = 'SET_CPU_ALERTS';
+
+export const SET_MEMORY_ALERTS = 'SET_MEMORY_ALERTS';
+
+export const PLAY_CPU_ALERT = 'PLAY_CPU_ALERT';
+
+export const PLAY_MEMORY_ALERT = 'PLAY_MEMORY_ALERT';
+
+export const SEND_LAST_UPDATE = 'SEND_LAST_UPDATE';
+
+export const LOAD_DATA_FOR_REPLAY = "LOAD_DATA_FOR_REPLAY";
+
+export const PLAY_NEXT = "PLAY_NEXT";
+
+export const PLAY_PREVIOUS = "PLAY_PREVIOUS";
+
+export const SAVE = "SAVE";
+
+export const LOAD = "LOAD";
