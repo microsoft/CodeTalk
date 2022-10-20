@@ -36,8 +36,6 @@ namespace Microsoft.CodeTalk.LanguageService
         }
 
         /// <summary>
-        /// <summary>
-        /// </summary>
         /// <param name="node">The FunctionDefinition node</param>
         /// <param name="currentCodeFile">The current CodeFile</param>
         /// <param name="parent">The parent of the current CodeFile</param>
@@ -58,6 +56,42 @@ namespace Microsoft.CodeTalk.LanguageService
             
             return fn;
             
+        }
+
+        internal static ForBlock createForBlock(IronPython.Compiler.Ast.ForStatement node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            ForBlock forBlock = new ForBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return forBlock;
+        }
+
+        internal static ForBlock createComprehensionForBlock(IronPython.Compiler.Ast.ComprehensionFor node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            ForBlock forBlock = new ForBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return forBlock;
+        }
+
+        internal static WhileBlock createWhileBlock(IronPython.Compiler.Ast.WhileStatement node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            WhileBlock whileBlock = new WhileBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return whileBlock;
+        }
+
+        internal static IfBlock createIfBlock(IronPython.Compiler.Ast.IfStatement node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            IfBlock ifBlock = new IfBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return ifBlock;
+        }
+
+        internal static IfBlock createComprehensionIfBlock(IronPython.Compiler.Ast.ComprehensionIf node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            IfBlock ifBlock = new IfBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return ifBlock;
+        }
+
+        internal static TryBlock createTryBlock(IronPython.Compiler.Ast.TryStatement node, CodeFile currentCodeFile, ISyntaxEntity parent)
+        {
+            TryBlock tryBlock = new TryBlock("", new FileSpan(node.Start.Line, node.Start.Column, node.End.Line, node.End.Column), parent, currentCodeFile);
+            return tryBlock;
         }
     }
 }
