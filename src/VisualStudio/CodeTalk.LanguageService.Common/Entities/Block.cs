@@ -4,8 +4,6 @@
 //------------------------------------------------------------------------------
 
 using Microsoft.CodeTalk.LanguageService.Properties;
-using System;
-using System.Diagnostics;
 using System.Resources;
 
 namespace Microsoft.CodeTalk.LanguageService

@@ -5,8 +5,6 @@
 
 using System;
 using System.Linq;
-using Microsoft.CodeTalk.LanguageService;
-using Microsoft.CodeTalk.LanguageService.Languages;
 using Microsoft.Pex.Framework;
 using Microsoft.Pex.Framework.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

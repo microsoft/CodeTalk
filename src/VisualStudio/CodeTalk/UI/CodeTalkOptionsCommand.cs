@@ -5,16 +5,15 @@
 
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.CodeTalk
 {
-	/// <summary>
-	/// Command handler
-	/// </summary>
-	internal sealed class CodeTalkOptionsCommand
+    /// <summary>
+    /// Command handler
+    /// </summary>
+    internal sealed class CodeTalkOptionsCommand
 	{
 		/// <summary>
 		/// Command ID.

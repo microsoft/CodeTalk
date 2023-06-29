@@ -3,14 +3,7 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using IronPython.Compiler.Ast;
-using Microsoft.CodeTalk.LanguageService.Entities.UDT;
 
 namespace Microsoft.CodeTalk.LanguageService
 {

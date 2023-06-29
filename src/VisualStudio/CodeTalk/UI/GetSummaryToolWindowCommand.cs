@@ -5,16 +5,15 @@
 
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.CodeTalk.UI
 {
-	/// <summary>
-	/// Command handler
-	/// </summary>
-	internal sealed class GetSummaryToolWindowCommand
+    /// <summary>
+    /// Command handler
+    /// </summary>
+    internal sealed class GetSummaryToolWindowCommand
 	{
 		/// <summary>
 		/// Command ID.

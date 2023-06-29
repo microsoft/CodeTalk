@@ -6,21 +6,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 using Microsoft.Scripting;
 
 using Microsoft.Scripting.Hosting;
-using IronPython;
-using IronPython.Hosting;
-using IronPython.Runtime;
 using IronPython.Compiler.Ast;
 using IronPython.Compiler;
 using Microsoft.Scripting.Hosting.Providers;
 using Microsoft.Scripting.Runtime;
-using System.Diagnostics;
 using System.Globalization;
 using System.Resources;
 using Microsoft.CodeTalk.LanguageService.Properties;

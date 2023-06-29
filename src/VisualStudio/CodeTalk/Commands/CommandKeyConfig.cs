@@ -4,17 +4,14 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static Microsoft.CodeTalk.Commands.CommandConstants;
 
 namespace Microsoft.CodeTalk.Commands
 {
-	public class CommandKeyConfig
+    public class CommandKeyConfig
 	{
 		[XmlAttribute(AttributeName = "CommandKey")]
 		public string CommandKeyString { get; set; }

@@ -3,16 +3,12 @@
 // Licensed under the MIT License.
 //------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.LanguageService
 {
-	public abstract class AbstractSyntaxEntity : ISyntaxEntity
+    public abstract class AbstractSyntaxEntity : ISyntaxEntity
 	{
 		/// <summary>
 		/// We need this because we frequently encounter situations where

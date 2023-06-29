@@ -11,18 +11,12 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Media;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
 using static Microsoft.CodeTalk.Constants;
 using Microsoft.CodeTalk.Talkpoints;
+using Microsoft.CodeTalk.Profilepoints;
 
 namespace Microsoft.CodeTalk
 {
@@ -33,6 +27,9 @@ namespace Microsoft.CodeTalk
         DebuggerEvents debugEvents;
 
         List<Talkpoint> mTalkPoints;
+        List<Profilepoint> listOfProfilepoints;
+
+        public static FunctionLevelDetailsHandler functionLevelDetailsHandler;
 
         EnvDTE.Window focussedWindow;
 
@@ -128,6 +125,11 @@ namespace Microsoft.CodeTalk
 
         }
 
+        public void SetBreakpointHandler(FunctionLevelDetailsHandler TalkCodefunctionLevelDetailsHandler)
+        {
+            functionLevelDetailsHandler = TalkCodefunctionLevelDetailsHandler;
+        }
+
         public string RunExpressionInDebugger(string expression)
         {
 			var exprResult = dte.Debugger.GetExpression(expression);
@@ -143,6 +145,27 @@ namespace Microsoft.CodeTalk
             return mTalkPoints.Where(b => (breakpoint.File.Equals(b.filePath) && breakpoint.FileLine == b.position.lineNumber)).FirstOrDefault();
         }
 
+        public void AddProfilePointToCurrentLine(int lineNumber)
+        {
+            try
+            {
+                var cursorPos = new CursorPos(lineNumber, 15);
+                var filePath = GetActiveDocumentPath();
+                //Toggling Talkpoint
+                //RemoveIfTalkpointsExists(filePath, cursorPos);
+                //if (CheckIfBreakpointExists(filePath, cursorPos))
+                //{
+                //    RemoveBreakpoints(filePath, cursorPos);
+                //    return;
+                //}
+                Talkpoint profilepoint = new Profilepoint(filePath, cursorPos, true, lineNumber, functionLevelDetailsHandler);
+                AddTalkPoint(profilepoint);
+            }
+            catch (Exception exp)   //We have to catch the exception here, or the IDE can crash
+            {
+                Debug.WriteLine(exp.StackTrace);
+            }
+        }
 
         public void AddTonalTalkPointToCurrentLine(Tones tone, bool doesContinue)
         {
@@ -257,6 +280,25 @@ namespace Microsoft.CodeTalk
             {
                 Debug.WriteLine(exp.StackTrace);
             }
+        }
+
+        public void AddAllProfilepoints()
+        {
+            //foreach
+            IEnumerable<ISyntaxEntity> functions = functionLevelDetailsHandler.GetFunctions();
+            List<int> startLineNumbers = functions.Select(func => (func.Location.StartLineNumber + 1)).ToList();
+            List<int> endLineNumbers = functions.Select(func => func.Location.EndLineNumber).ToList();
+            List<int> profilePointsLineNumbers = new List<int>();
+            foreach (var functionSpan in startLineNumbers.Zip(endLineNumbers, Tuple.Create))
+            {
+                profilePointsLineNumbers.AddRange(Enumerable.Range(functionSpan.Item1, functionSpan.Item2).ToList());
+            }
+            profilePointsLineNumbers.ForEach(lineNumber => this.AddProfilePointToCurrentLine(lineNumber));
+        }
+
+        public void AddAllBreakpoints()
+        {
+            //foreach
         }
 
         public bool CheckIfBreakpointExists(string filePath, CursorPos position)
@@ -389,6 +431,19 @@ namespace Microsoft.CodeTalk
             {
                 System.Windows.Forms.MessageBox.Show("error finding resource. " + e.StackTrace);
                 Console.WriteLine(e.Message);
+            }
+        }
+
+        public int GetProcessId()
+        {
+            Debug.WriteLine("Getting into GetProcessId");
+            EnvDTE.Process process = dte.Debugger.CurrentProcess;
+            if (process == null)
+                return -1;
+            else
+            {
+                Debug.WriteLine("Currently Debugging ID: " + process.ProcessID + " name: " + process.Name);
+                return process.ProcessID;
             }
         }
 

@@ -6,10 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Microsoft.CodeTalk.Commands
 {
@@ -211,7 +208,13 @@ namespace Microsoft.CodeTalk.Commands
 				CommandKey = Keys.B,
 				CommandKeyString = KeyNamesMap[Keys.B],
 				CommandModifierKey = ModifierKeys.Control
-			}
-		};
+			},
+            SetProfilepointsCommandKeyConfig = new CommandKeyConfig()
+            {
+                CommandKey = Keys.K,
+                CommandKeyString = KeyNamesMap[Keys.K],
+                CommandModifierKey = ModifierKeys.Control
+            }
+        };
     }
 }

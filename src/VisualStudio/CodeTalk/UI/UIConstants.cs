@@ -4,15 +4,12 @@
 //------------------------------------------------------------------------------
 
 using Microsoft.CodeTalk.LanguageService;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.UI
 {
-	class UIConstants
+    class UIConstants
 	{
 		public static Dictionary<SyntaxEntityKind, string> UIImageFileDictionary = new Dictionary<SyntaxEntityKind, string>
 		{

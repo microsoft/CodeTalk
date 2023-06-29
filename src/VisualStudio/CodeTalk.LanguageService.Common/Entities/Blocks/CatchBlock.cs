@@ -4,15 +4,11 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.CodeTalk.LanguageService
 {
-	public class CatchBlock : Block
+    public class CatchBlock : Block
 	{
 		public CatchBlock(string typeName, FileSpan fileLocation, ISyntaxEntity parent, CodeFile currentCodeFile) 
 			: base(typeName, fileLocation, parent, currentCodeFile)
